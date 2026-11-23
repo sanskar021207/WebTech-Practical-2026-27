@@ -1,0 +1,1353 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMED Pune | Bharati Vidyapeeth</title>
+
+<style>
+:root {
+    --navy: #102b50;
+    --blue: #174a78;
+    --gold: #d9ad55;
+    --light: #f5f7fa;
+    --text: #263449;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: var(--text);
+    background: white;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* TOP BAR */
+
+.topbar {
+    background: var(--navy);
+    color: white;
+    padding: 9px 7%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* HEADER */
+
+header {
+    background: white;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 12px #00000012;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    background: var(--navy);
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 8px;
+    border-bottom: 4px solid var(--gold);
+}
+
+.brand h2 {
+    font-size: 21px;
+    color: var(--navy);
+}
+
+.brand p {
+    font-size: 11px;
+    color: #777;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 23px;
+}
+
+nav ul li a {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--navy);
+    transition: .3s;
+}
+
+nav ul li a:hover {
+    color: #c18b29;
+}
+
+nav .apply {
+    background: var(--navy);
+    color: white;
+    padding: 11px 17px;
+    border-radius: 5px;
+}
+
+nav .apply:hover {
+    background: var(--gold);
+    color: var(--navy);
+}
+
+.menu-btn {
+    display: none;
+    border: none;
+    background: var(--navy);
+    color: white;
+    padding: 9px 12px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 580px;
+    display: flex;
+    align-items: center;
+    padding: 70px 8%;
+    color: white;
+    background:
+    linear-gradient(90deg, rgba(8,29,56,.94), rgba(8,29,56,.45)),
+    url("https://www.bvuniversity.edu.in/imed/images/about-home.jpg")
+    center/cover no-repeat;
+}
+
+.hero-content {
+    max-width: 690px;
+}
+
+.hero-tag {
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1.15;
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: var(--gold);
+}
+
+.hero p {
+    max-width: 570px;
+    font-size: 16px;
+    color: #e3e8ef;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 13px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 5px;
+    transition: .3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+/* COMMON SECTION */
+
+section {
+    padding: 75px 8%;
+    scroll-margin-top: 90px;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-heading small {
+    color: #b28332;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.section-heading h2 {
+    color: var(--navy);
+    font-size: 34px;
+    margin: 8px 0;
+}
+
+.section-heading p {
+    color: #777;
+    max-width: 650px;
+    margin: auto;
+}
+
+/* ABOUT */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 45px;
+}
+
+.about-img img {
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.about-text h2 {
+    color: var(--navy);
+    font-size: 34px;
+    margin: 12px 0;
+}
+
+.about-text p {
+    margin: 15px 0;
+    color: #657080;
+}
+
+.highlight {
+    color: #bd8c38;
+    font-weight: bold;
+}
+
+/* STATS */
+
+.stats {
+    background: var(--navy);
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+    padding: 40px 8%;
+}
+
+.stat h2 {
+    color: var(--gold);
+    font-size: 34px;
+}
+
+.stat p {
+    font-size: 14px;
+}
+
+/* COURSES */
+
+.courses {
+    background: var(--light);
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.course-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px #0000000c;
+    transition: .3s;
+}
+
+.course-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px #00000018;
+}
+
+.course-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.course-info {
+    padding: 22px;
+}
+
+.course-info h3 {
+    color: var(--navy);
+    margin-bottom: 9px;
+}
+
+.course-info p {
+    color: #727d8b;
+    font-size: 14px;
+}
+
+.course-info a {
+    display: inline-block;
+    color: #a87927;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* DEPARTMENTS */
+
+.department-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dept {
+    background: var(--navy);
+    color: white;
+    padding: 28px;
+    border-radius: 9px;
+    transition: .3s;
+    border-bottom: 4px solid var(--gold);
+}
+
+.dept:hover {
+    background: var(--blue);
+    transform: translateY(-5px);
+}
+
+.dept .symbol {
+    color: var(--gold);
+    font-size: 30px;
+}
+
+.dept h3 {
+    margin: 12px 0;
+}
+
+/* FACILITIES */
+
+.facilities {
+    background: var(--light);
+}
+
+.facility-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.facility {
+    background: white;
+    padding: 25px;
+    border-radius: 9px;
+    text-align: center;
+}
+
+.facility span {
+    font-size: 35px;
+}
+
+.facility h3 {
+    color: var(--navy);
+    margin: 12px 0;
+}
+
+/* PLACEMENTS */
+
+.placement {
+    background: var(--navy);
+    color: white;
+}
+
+.placement .section-heading h2 {
+    color: white;
+}
+
+.placement .section-heading p {
+    color: #c8d3e1;
+}
+
+.recruiters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.recruiters span {
+    background: white;
+    color: var(--navy);
+    padding: 15px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* CAMPUS LIFE */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.025);
+}
+
+/* ADMISSION */
+
+.admission {
+    background: var(--light);
+}
+
+.admission-box {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px #00000010;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d4dce6;
+    border-radius: 6px;
+    font: inherit;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.admission button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#formMessage {
+    color: #187a4c;
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* CONTACT */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+}
+
+.contact-info h3 {
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    margin: 15px 0;
+    color: #657080;
+}
+
+.map-box {
+    min-height: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.map-box iframe {
+    width: 100%;
+    height: 280px;
+    border: 0;
+}
+
+/* FOOTER */
+
+footer {
+    background: #091e38;
+    color: white;
+    padding: 45px 8% 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 35px;
+}
+
+footer h3 {
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+footer p, footer a {
+    font-size: 14px;
+    color: #c7d0dc;
+    display: block;
+    margin: 8px 0;
+}
+
+footer a:hover {
+    color: var(--gold);
+}
+
+.copyright {
+    border-top: 1px solid #ffffff25;
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 18px;
+    font-size: 13px;
+    color: #aebbc9;
+}
+
+/* ANIMATIONS */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: .7s;
+}
+
+.reveal.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 1000px) {
+    nav ul {
+        gap: 12px;
+    }
+
+    nav ul li a {
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 800px) {
+    .menu-btn {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 15px 7%;
+        box-shadow: 0 5px 10px #00000015;
+    }
+
+    nav.open {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .about,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .course-grid,
+    .department-grid,
+    .facility-grid,
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width: 520px) {
+    .brand h2 {
+        font-size: 16px;
+    }
+
+    .brand p {
+        font-size: 9px;
+    }
+
+    .logo {
+        width: 48px;
+        height: 48px;
+        font-size: 19px;
+    }
+
+    .course-grid,
+    .department-grid,
+    .facility-grid,
+    .gallery-grid,
+    .form-grid,
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 500px;
+        padding: 55px 7%;
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .admission-box {
+        padding: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+    <span>📍 Erandwane, Paud Road, Pune - 411038</span>
+    <span>✉ imed@bharatividyapeeth.edu</span>
+    <span>☎ +91 20 29970344</span>
+</div>
+
+
+<!-- HEADER AND NAVIGATION -->
+
+<header>
+
+    <div class="brand">
+        <div class="logo">IMED</div>
+        <div>
+            <h2>IMED PUNE</h2>
+            <p>Bharati Vidyapeeth (Deemed to be University)</p>
+        </div>
+    </div>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+        ☰
+    </button>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#courses">Programmes</a></li>
+            <li><a href="#departments">Departments</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#placements">Placements</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a class="apply" href="#admission">Apply Now</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+
+<!-- HERO SECTION -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="hero-tag">ESTABLISHED IN 1978</span>
+
+        <h1>
+            Shape Your Future With
+            <span>Knowledge & Innovation</span>
+        </h1>
+
+        <p>
+            Welcome to the Institute of Management and Entrepreneurship
+            Development, Pune. Explore opportunities in management,
+            computer applications, research and entrepreneurship.
+        </p>
+
+        <a href="#courses" class="btn">Explore Programmes</a>
+
+        <a href="#about" class="btn btn-outline">Discover IMED</a>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT SECTION -->
+
+<section id="about">
+
+    <div class="about reveal">
+
+        <div class="about-img">
+            <img
+            src="https://www.bvuniversity.edu.in/imed/images/about-home.jpg"
+            alt="IMED students">
+        </div>
+
+        <div class="about-text">
+
+            <span class="highlight">ABOUT OUR INSTITUTE</span>
+
+            <h2>Welcome to IMED Pune</h2>
+
+            <p>
+                Institute of Management and Entrepreneurship Development
+                was established by Bharati Vidyapeeth in 1978.
+                It is a constituent institute of Bharati Vidyapeeth
+                (Deemed to be University), Pune.
+            </p>
+
+            <p>
+                IMED focuses on management education, computer applications,
+                research, entrepreneurship and industry-oriented learning.
+            </p>
+
+            <p>
+                The institute is spread across approximately four acres
+                and provides academic and instructional facilities
+                for students.
+            </p>
+
+            <a href="https://www.bvuniversity.edu.in/imed/about/overview"
+            target="_blank" class="btn">Read More</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS SECTION -->
+
+<div class="stats">
+
+    <div class="stat">
+        <h2 class="counter" data-target="1978">0</h2>
+        <p>Year Established</p>
+    </div>
+
+    <div class="stat">
+        <h2>4 Acres</h2>
+        <p>Campus Area</p>
+    </div>
+
+    <div class="stat">
+        <h2>150+</h2>
+        <p>Placement Companies*</p>
+    </div>
+
+    <div class="stat">
+        <h2>30,000+</h2>
+        <p>Alumni Network*</p>
+    </div>
+
+</div>
+
+
+<!-- PROGRAMMES SECTION -->
+
+<section class="courses" id="courses">
+
+    <div class="section-heading reveal">
+        <small>ACADEMIC EXCELLENCE</small>
+        <h2>Our Academic Programmes</h2>
+        <p>
+            Discover undergraduate and postgraduate programmes
+            designed for academic and professional growth.
+        </p>
+    </div>
+
+    <div class="course-grid">
+
+        <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80" alt="BBA students">
+            <div class="course-info">
+                <h3>BBA</h3>
+                <p>Bachelor of Business Administration</p>
+                <a href="https://www.bvuniversity.edu.in/imed/"
+                target="_blank">Explore Programme →</a>
+            </div>
+        </div>
+
+        <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Computer applications">
+            <div class="course-info">
+                <h3>BCA</h3>
+                <p>Bachelor of Computer Applications</p>
+                <a href="https://www.bvuniversity.edu.in/imed/"
+                target="_blank">Explore Programme →</a>
+            </div>
+        </div>
+
+        <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="MBA programme">
+            <div class="course-info">
+                <h3>MBA</h3>
+                <p>Master of Business Administration</p>
+                <a href="https://www.bvuniversity.edu.in/imed/"
+                target="_blank">Explore Programme →</a>
+            </div>
+        </div>
+
+        <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Human resources">
+            <div class="course-info">
+                <h3>MBA (HR)</h3>
+                <p>Master of Business Administration - Human Resources</p>
+                <a href="https://www.bvuniversity.edu.in/imed/"
+                target="_blank">Explore Programme →</a>
+            </div>
+        </div>
+
+        <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="MCA students">
+            <div class="course-info">
+                <h3>MCA</h3>
+                <p>Master of Computer Applications</p>
+                <a href="https://www.bvuniversity.edu.in/imed/"
+                target="_blank">Explore Programme →</a>
+            </div>
+        </div>
+
+        <div class="course-card reveal">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Research and innovation">
+            <div class="course-info">
+                <h3>Research & Ph.D.</h3>
+                <p>Research and innovation opportunities</p>
+                <a href="https://www.bvuniversity.edu.in/imed/"
+                target="_blank">Explore Research →</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DEPARTMENTS -->
+
+<section id="departments">
+
+    <div class="section-heading reveal">
+        <small>OUR ACADEMIC DISCIPLINES</small>
+        <h2>Departments & Disciplines</h2>
+        <p>Explore the academic areas at IMED Pune.</p>
+    </div>
+
+    <div class="department-grid">
+
+        <div class="dept reveal">
+            <div class="symbol">💻</div>
+            <h3>Computer Applications</h3>
+            <p>Computer education, software development and technology.</p>
+        </div>
+
+        <div class="dept reveal">
+            <div class="symbol">📊</div>
+            <h3>Management</h3>
+            <p>Business management, leadership and entrepreneurship.</p>
+        </div>
+
+        <div class="dept reveal">
+            <div class="symbol">👥</div>
+            <h3>Human Resource Management</h3>
+            <p>People management and organizational development.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FACILITIES -->
+
+<section class="facilities" id="facilities">
+
+    <div class="section-heading reveal">
+        <small>CAMPUS EXPERIENCE</small>
+        <h2>Student Facilities</h2>
+        <p>Resources and facilities supporting learning and development.</p>
+    </div>
+
+    <div class="facility-grid">
+
+        <div class="facility reveal">
+            <span>📚</span>
+            <h3>Library</h3>
+            <p>Learning resources and academic reading facilities.</p>
+        </div>
+
+        <div class="facility reveal">
+            <span>💻</span>
+            <h3>Computer Labs</h3>
+            <p>Technology-oriented learning and practical sessions.</p>
+        </div>
+
+        <div class="facility reveal">
+            <span>🏫</span>
+            <h3>Smart Classrooms</h3>
+            <p>Modern teaching and instructional facilities.</p>
+        </div>
+
+        <div class="facility reveal">
+            <span>🎤</span>
+            <h3>Seminars & Workshops</h3>
+            <p>Expert sessions and industry interactions.</p>
+        </div>
+
+        <div class="facility reveal">
+            <span>🏆</span>
+            <h3>Sports & Activities</h3>
+            <p>Opportunities for sports and student participation.</p>
+        </div>
+
+        <div class="facility reveal">
+            <span>🚀</span>
+            <h3>Entrepreneurship</h3>
+            <p>Innovation, ideas and startup development.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PLACEMENTS -->
+
+<section class="placement" id="placements">
+
+    <div class="section-heading reveal">
+        <small>CAREER DEVELOPMENT</small>
+        <h2>Corporate Connections & Placements</h2>
+        <p>
+            IMED's Corporate Resource Centre supports students
+            through placement preparation, internships,
+            career guidance and corporate engagement.
+        </p>
+    </div>
+
+    <div class="recruiters reveal">
+        <span>Amazon</span>
+        <span>TCS</span>
+        <span>Wipro</span>
+        <span>HDFC</span>
+        <span>ICICI Bank</span>
+        <span>Reliance</span>
+        <span>Oracle</span>
+        <span>Tech Mahindra</span>
+    </div>
+
+    <p style="text-align:center; margin-top:30px; color:#d4dce6;">
+        *Recruiter names are based on organisations featured
+        in the institute's published information.
+    </p>
+
+    <div style="text-align:center; margin-top:25px;">
+        <a href="https://www.bvuniversity.edu.in/imed/"
+        target="_blank" class="btn">Placement Information</a>
+    </div>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section id="gallery">
+
+    <div class="section-heading reveal">
+        <small>EXPLORE OUR WORLD</small>
+        <h2>Campus & Student Life</h2>
+        <p>
+            Learning, collaboration, innovation and student experiences.
+        </p>
+    </div>
+
+    <div class="gallery-grid">
+
+        <img class="reveal"
+        src="https://www.bvuniversity.edu.in/imed/images/about-home.jpg"
+        alt="IMED students">
+
+        <img class="reveal"
+        src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80"
+        alt="University building">
+
+        <img class="reveal"
+        src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+        alt="Students working together">
+
+        <img class="reveal"
+        src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=800&q=80"
+        alt="Graduation">
+
+        <img class="reveal"
+        src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80"
+        alt="Student activities">
+
+        <img class="reveal"
+        src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
+        alt="Learning environment">
+
+    </div>
+
+</section>
+
+
+<!-- ADMISSION FORM -->
+
+<section class="admission" id="admission">
+
+    <div class="section-heading reveal">
+        <small>YOUR JOURNEY STARTS HERE</small>
+        <h2>Admission Enquiry</h2>
+        <p>Interested in joining IMED? Submit your enquiry.</p>
+    </div>
+
+    <div class="admission-box reveal">
+
+        <form id="admissionForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="studentName"
+                    placeholder="Enter full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="studentEmail"
+                    placeholder="Enter email" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="studentPhone"
+                    placeholder="10 digit number"
+                    pattern="[0-9]{10}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Choose Programme</label>
+                    <select id="programme" required>
+                        <option value="">Select Programme</option>
+                        <option>BBA</option>
+                        <option>BCA</option>
+                        <option>MBA</option>
+                        <option>MBA (HR)</option>
+                        <option>MCA</option>
+                        <option>Ph.D.</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label>Your Message</label>
+                    <textarea id="message" rows="4"
+                    placeholder="Write your enquiry here..."></textarea>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn">
+                Submit Enquiry
+            </button>
+
+            <p id="formMessage"></p>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <div class="section-heading reveal">
+        <small>GET IN TOUCH</small>
+        <h2>Contact IMED Pune</h2>
+    </div>
+
+    <div class="contact-grid">
+
+        <div class="contact-info reveal">
+
+            <h3>Institute of Management and Entrepreneurship Development</h3>
+
+            <p>📍 Bharati Vidyapeeth Educational Complex,
+            More Vidyalaya Campus, Erandwane, Paud Road,
+            Pune - 411038, Maharashtra, India.</p>
+
+            <p>☎ +91 20 29970344 / 29970355</p>
+
+            <p>✉ imed@bharatividyapeeth.edu</p>
+
+            <p>🌐 www.bvuniversity.edu.in/imed/</p>
+
+            <a href="https://www.bvuniversity.edu.in/imed/contact-us"
+            target="_blank" class="btn">Official Contact Page</a>
+
+        </div>
+
+        <div class="map-box reveal">
+
+            <iframe
+            src="https://www.google.com/maps?q=Institute%20of%20Management%20and%20Entrepreneurship%20Development%20Pune&output=embed"
+            loading="lazy"
+            allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-grid">
+
+        <div>
+            <h3>IMED PUNE</h3>
+            <p>
+                Institute of Management and Entrepreneurship Development,
+                Bharati Vidyapeeth (Deemed to be University), Pune.
+            </p>
+            <p>Creating Successful Leaders and Entrepreneurs.</p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#courses">Programmes</a>
+            <a href="#placements">Placements</a>
+            <a href="#admission">Admissions</a>
+        </div>
+
+        <div>
+            <h3>Useful Links</h3>
+            <a href="https://www.bvuniversity.edu.in/imed/"
+            target="_blank">Official Website</a>
+            <a href="https://www.bvuniversity.edu.in/imed/"
+            target="_blank">Programmes</a>
+            <a href="https://www.bvuniversity.edu.in/imed/contact-us"
+            target="_blank">Contact</a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 IMED Pune Website Project | Designed for educational purposes
+    </div>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+// MOBILE MENU
+
+const menuBtn = document.getElementById("menuBtn");
+const navbar = document.getElementById("navbar");
+
+menuBtn.addEventListener("click", function() {
+    navbar.classList.toggle("open");
+
+    menuBtn.innerText =
+        navbar.classList.contains("open") ? "✕" : "☰";
+});
+
+document.querySelectorAll("#navbar a").forEach(function(link) {
+    link.addEventListener("click", function() {
+        navbar.classList.remove("open");
+        menuBtn.innerText = "☰";
+    });
+});
+
+
+// SCROLL ANIMATION
+
+const observer = new IntersectionObserver(function(entries) {
+
+    entries.forEach(function(entry) {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+        }
+
+    });
+
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(function(element) {
+    observer.observe(element);
+});
+
+
+// ADMISSION FORM
+
+document.getElementById("admissionForm")
+.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById("studentName").value;
+    const programme = document.getElementById("programme").value;
+
+    document.getElementById("formMessage").innerText =
+        "Thank you, " + name +
+        "! Your " + programme +
+        " admission enquiry has been submitted successfully.";
+
+    this.reset();
+
+});
+
+
+// COUNTER ANIMATION
+
+const counterObserver = new IntersectionObserver(function(entries) {
+
+    entries.forEach(function(entry) {
+
+        if (entry.isIntersecting) {
+
+            const counter = entry.target;
+            const target = Number(counter.dataset.target);
+            let current = 0;
+
+            const increment = Math.ceil(target / 60);
+
+            const timer = setInterval(function() {
+
+                current += increment;
+
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+
+                counter.innerText = current;
+
+            }, 25);
+
+            counterObserver.unobserve(counter);
+        }
+
+    });
+
+});
+
+document.querySelectorAll(".counter").forEach(function(counter) {
+    counterObserver.observe(counter);
+});
+
+</script>
+
+</body>
+</html>
