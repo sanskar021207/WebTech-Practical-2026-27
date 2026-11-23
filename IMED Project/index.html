@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CircuitYard — PC Parts &amp; Trade-In Marketplace</title>
+<style>
+:root{
+  --bg:#0E131A;
+  --panel:#161D27;
+  --panel-2:#1D2531;
+  --line:#2A3441;
+  --text:#E7ECF2;
+  --muted:#8B98AA;
+  --teal:#4FD1C5;
+  --teal-dim:#1F3A38;
+  --amber:#F0A93A;
+  --amber-dim:#3A2E17;
+  --danger:#E2685C;
+  --mono:'JetBrains Mono', 'Courier New', monospace;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  line-height:1.5;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:48px 48px;
+  background-attachment:fixed;
+  background-color:var(--bg);
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at top, rgba(14,19,26,0) 0%, var(--bg) 75%);
+  pointer-events:none;
+  z-index:0;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;}
+img{display:block;max-width:100%;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(14,19,26,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 28px;max-width:1180px;margin:0 auto;
+}
+.logo{
+  font-family:var(--mono);font-size:19px;letter-spacing:0.5px;
+  display:flex;align-items:center;gap:8px;
+}
+.logo .dot{width:8px;height:8px;background:var(--teal);border-radius:50%;box-shadow:0 0 8px var(--teal);}
+.navlinks{display:flex;gap:32px;font-size:14px;color:var(--muted);}
+.navlinks a{position:relative;padding:6px 0;transition:color .15s;}
+.navlinks a:hover, .navlinks a.active{color:var(--text);}
+.navlinks a.active::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--teal);
+}
+.navright{display:flex;align-items:center;gap:18px;}
+.cart-btn{
+  font-family:var(--mono);font-size:13px;
+  background:var(--panel-2);border:1px solid var(--line);
+  color:var(--text);padding:9px 14px;
+  display:flex;align-items:center;gap:8px;
+}
+.cart-btn:hover{border-color:var(--teal);}
+.cart-count{
+  background:var(--teal);color:#08201E;font-weight:700;
+  border-radius:3px;padding:1px 6px;font-size:12px;
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;z-index:1;
+  padding:88px 0 64px;
+  border-bottom:1px solid var(--line);
+}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;
+}
+.eyebrow-line{
+  font-family:var(--mono);font-size:12px;color:var(--teal);
+  display:flex;align-items:center;gap:10px;margin-bottom:22px;
+}
+.eyebrow-line .rule{width:32px;height:1px;background:var(--teal);}
+h1.hero-title{
+  font-size:52px;line-height:1.08;font-weight:700;letter-spacing:-1px;
+  margin-bottom:20px;
+}
+h1.hero-title .accent{color:var(--teal);}
+.hero-sub{
+  color:var(--muted);font-size:16px;max-width:46ch;margin-bottom:32px;
+}
+.hero-ctas{display:flex;gap:14px;margin-bottom:36px;}
+.btn{
+  font-family:var(--mono);font-size:13.5px;padding:13px 22px;
+  border:1px solid var(--line);transition:all .15s;
+}
+.btn-primary{background:var(--teal);color:#08201E;font-weight:700;border-color:var(--teal);}
+.btn-primary:hover{background:#3fc0b4;}
+.btn-ghost{background:transparent;color:var(--text);}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber);}
+.hero-stats{display:flex;gap:36px;}
+.hero-stats div{border-left:1px solid var(--line);padding-left:14px;}
+.hero-stats b{display:block;font-size:22px;font-family:var(--mono);}
+.hero-stats span{font-size:12px;color:var(--muted);}
+
+/* schematic panel */
+.schematic{
+  background:var(--panel);border:1px solid var(--line);
+  padding:22px;position:relative;
+}
+.schematic-head{
+  display:flex;justify-content:space-between;font-family:var(--mono);
+  font-size:11px;color:var(--muted);margin-bottom:14px;
+}
+.schematic svg{width:100%;height:auto;display:block;}
+
+/* ---------- SECTION HEADERS ---------- */
+.section{padding:72px 0;position:relative;z-index:1;}
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:34px;border-bottom:1px solid var(--line);padding-bottom:18px;
+}
+.section-head h2{font-size:28px;letter-spacing:-0.5px;}
+.section-head p{color:var(--muted);font-size:14px;max-width:40ch;}
+.tag{
+  font-family:var(--mono);font-size:11px;color:var(--teal);
+  border:1px solid var(--teal-dim);background:var(--teal-dim);
+  padding:4px 9px;
+}
+
+/* ---------- CATEGORY STRIP ---------- */
+.cat-strip{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-bottom:56px;
+}
+.cat-item{
+  background:var(--panel);padding:22px 16px;text-align:center;
+  transition:background .15s;cursor:pointer;
+}
+.cat-item:hover{background:var(--panel-2);}
+.cat-item .icon{font-size:22px;margin-bottom:10px;}
+.cat-item .name{font-size:12.5px;color:var(--muted);}
+.cat-item.active{background:var(--teal-dim);}
+.cat-item.active .name{color:var(--teal);}
+
+/* ---------- PRODUCT GRID ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.card{
+  background:var(--panel);border:1px solid var(--line);
+  display:flex;flex-direction:column;transition:border-color .15s;
+}
+.card:hover{border-color:var(--teal);}
+.card-media{
+  height:140px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:38px;background:
+    repeating-linear-gradient(45deg, var(--panel-2) 0 2px, transparent 2px 14px);
+}
+.card-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.card-cat{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:0.3px;}
+.card-title{font-size:14.5px;font-weight:600;}
+.card-specs{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.6;}
+.card-foot{
+  margin-top:auto;padding-top:12px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.price{font-family:var(--mono);font-size:16px;font-weight:700;}
+.add-btn{
+  font-family:var(--mono);font-size:12px;background:var(--panel-2);
+  border:1px solid var(--line);color:var(--text);padding:7px 12px;
+}
+.add-btn:hover{background:var(--teal);color:#08201E;border-color:var(--teal);}
+.add-btn.added{background:var(--teal);color:#08201E;border-color:var(--teal);}
+
+/* ---------- USED MARKETPLACE ---------- */
+.market{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.market .tag{color:var(--amber);border-color:var(--amber-dim);background:var(--amber-dim);}
+.market-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.sell-btn{
+  font-family:var(--mono);font-size:13px;background:var(--amber);
+  color:#231704;font-weight:700;padding:11px 18px;
+}
+.sell-btn:hover{background:#e0993a;}
+.listing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.listing{
+  background:var(--panel-2);border:1px solid var(--line);padding:16px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.listing:hover{border-color:var(--amber);}
+.listing-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.condition{
+  font-family:var(--mono);font-size:10px;padding:3px 7px;
+  border:1px solid var(--line);color:var(--muted);
+}
+.condition.good{color:var(--teal);border-color:var(--teal-dim);}
+.condition.fair{color:var(--amber);border-color:var(--amber-dim);}
+.listing-title{font-size:14px;font-weight:600;}
+.listing-meta{font-family:var(--mono);font-size:11px;color:var(--muted);}
+.listing-foot{display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--line);}
+.seller{font-size:11px;color:var(--muted);}
+.buy-btn{
+  font-family:var(--mono);font-size:11.5px;background:transparent;
+  border:1px solid var(--amber);color:var(--amber);padding:6px 11px;
+}
+.buy-btn:hover{background:var(--amber);color:#231704;}
+.new-badge{
+  font-family:var(--mono);font-size:10px;color:#231704;background:var(--amber);
+  padding:2px 6px;position:absolute;margin-top:-26px;
+}
+
+/* ---------- HOW IT WORKS ---------- */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.flow-step{background:var(--bg);padding:26px;}
+.flow-step .num{font-family:var(--mono);color:var(--teal);font-size:12px;margin-bottom:10px;}
+.flow-step h3{font-size:16px;margin-bottom:8px;}
+.flow-step p{font-size:13px;color:var(--muted);}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line);padding:40px 0;position:relative;z-index:1;}
+.foot-row{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);}
+.foot-row .logo{font-size:15px;}
+
+/* ---------- CART DRAWER ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(6,9,13,0.6);
+  opacity:0;pointer-events:none;transition:opacity .2s;z-index:99;
+}
+.overlay.open{opacity:1;pointer-events:all;}
+.drawer{
+  position:fixed;top:0;right:-420px;width:400px;height:100%;
+  background:var(--panel);border-left:1px solid var(--line);
+  z-index:100;transition:right .25s ease;display:flex;flex-direction:column;
+}
+.drawer.open{right:0;}
+.drawer-head{
+  padding:20px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.drawer-head h3{font-family:var(--mono);font-size:15px;}
+.close-btn{background:none;color:var(--muted);font-size:20px;line-height:1;}
+.close-btn:hover{color:var(--text);}
+.drawer-items{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px;}
+.drawer-empty{color:var(--muted);font-size:13px;text-align:center;padding:40px 0;}
+.drawer-item{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px;}
+.drawer-item .thumb{
+  width:42px;height:42px;background:var(--panel-2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.drawer-item .info{flex:1;}
+.drawer-item .info .t{font-size:13px;font-weight:600;}
+.drawer-item .info .p{font-family:var(--mono);font-size:12px;color:var(--muted);}
+.remove-x{background:none;color:var(--danger);font-size:16px;}
+.drawer-foot{padding:20px;border-top:1px solid var(--line);}
+.drawer-total{display:flex;justify-content:space-between;font-family:var(--mono);margin-bottom:14px;font-size:15px;}
+.checkout-btn{width:100%;background:var(--teal);color:#08201E;font-family:var(--mono);font-weight:700;padding:14px;font-size:13.5px;}
+.checkout-btn:hover{background:#3fc0b4;}
+
+/* ---------- SELL MODAL ---------- */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(6,9,13,0.7);
+  display:none;align-items:center;justify-content:center;z-index:101;padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:var(--panel);border:1px solid var(--line);
+  width:100%;max-width:460px;padding:26px;
+}
+.modal h3{font-family:var(--mono);font-size:16px;margin-bottom:4px;}
+.modal p.sub{color:var(--muted);font-size:13px;margin-bottom:20px;}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-family:var(--mono);}
+.field input, .field select{
+  width:100%;background:var(--panel-2);border:1px solid var(--line);
+  color:var(--text);padding:10px 12px;font-family:var(--sans);font-size:13.5px;
+}
+.field input:focus, .field select:focus{outline:none;border-color:var(--amber);}
+.modal-actions{display:flex;gap:10px;margin-top:22px;}
+.modal-actions .btn{flex:1;text-align:center;}
+
+/* ---------- TOAST ---------- */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--panel-2);border:1px solid var(--teal);color:var(--text);
+  padding:12px 20px;font-family:var(--mono);font-size:13px;
+  opacity:0;pointer-events:none;transition:all .25s;z-index:200;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;}
+  .cat-strip{grid-template-columns:repeat(3,1fr);}
+  .grid{grid-template-columns:repeat(2,1fr);}
+  .listing-grid{grid-template-columns:1fr;}
+  .flow{grid-template-columns:1fr;}
+  .navlinks{display:none;}
+  h1.hero-title{font-size:36px;}
+  .drawer{width:100%;right:-100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="nav">
+    <div class="logo"><span class="dot"></span>CircuitYard</div>
+    <nav class="navlinks">
+      <a href="#shop" class="active">New Parts</a>
+      <a href="#market">Used Marketplace</a>
+      <a href="#how">How it Works</a>
+      <a href="#">Support</a>
+    </nav>
+    <div class="navright">
+      <button class="cart-btn" id="cartOpenBtn">
+        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow-line"><span class="rule"></span>PC parts, new and second-hand</div>
+      <h1 class="hero-title">Build it new.<br>Or <span class="accent">trade it forward.</span></h1>
+      <p class="hero-sub">Buy new components at fair prices, or browse verified listings from other builders selling their used parts — and list your own gear in under a minute.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="btn btn-primary">Browse New Parts</a>
+        <a href="#market" class="btn btn-ghost">Sell / Buy Used</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>4,200+</b><span>Parts listed</span></div>
+        <div><b>860</b><span>Used listings live</span></div>
+        <div><b>24h</b><span>Avg. dispatch time</span></div>
+      </div>
+    </div>
+    <div class="schematic">
+      <div class="schematic-head"><span>FIG. 01 — SYSTEM.LAYOUT</span><span>REV B</span></div>
+      <svg viewBox="0 0 400 260" fill="none">
+        <rect x="20" y="20" width="360" height="220" stroke="#2A3441"/>
+        <rect x="40" y="40" width="140" height="60" stroke="#4FD1C5"/>
+        <text x="50" y="60" fill="#4FD1C5" font-size="10" font-family="monospace">CPU</text>
+        <text x="50" y="80" fill="#8B98AA" font-size="8" font-family="monospace">SOCKET AM5</text>
+        <rect x="200" y="40" width="160" height="40" stroke="#8B98AA"/>
+        <text x="210" y="64" fill="#8B98AA" font-size="10" font-family="monospace">GPU — RTX SERIES</text>
+        <rect x="40" y="120" width="70" height="90" stroke="#F0A93A"/>
+        <text x="48" y="140" fill="#F0A93A" font-size="9" font-family="monospace">RAM</text>
+        <rect x="120" y="120" width="70" height="90" stroke="#8B98AA"/>
+        <text x="128" y="140" fill="#8B98AA" font-size="9" font-family="monospace">SSD</text>
+        <rect x="200" y="100" width="160" height="110" stroke="#2A3441"/>
+        <text x="210" y="120" fill="#8B98AA" font-size="9" font-family="monospace">PSU / COOLING</text>
+        <line x1="180" y1="70" x2="200" y2="70" stroke="#4FD1C5"/>
+        <line x1="110" y1="120" x2="110" y2="90" stroke="#F0A93A"/>
+        <line x1="110" y1="90" x2="180" y2="90" stroke="#F0A93A"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEW PARTS ================= -->
+<section class="section" id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Shop new components</h2>
+        <p>Every category you need for a fresh build, sourced from authorized distributors.</p>
+      </div>
+      <span class="tag">NEW STOCK</span>
+    </div>
+
+    <div class="cat-strip" id="catStrip">
+      <div class="cat-item active" data-cat="all"><div class="icon">🧩</div><div class="name">All</div></div>
+      <div class="cat-item" data-cat="cpu"><div class="icon">🖥️</div><div class="name">CPU</div></div>
+      <div class="cat-item" data-cat="gpu"><div class="icon">🎮</div><div class="name">GPU</div></div>
+      <div class="cat-item" data-cat="ram"><div class="icon">📶</div><div class="name">RAM</div></div>
+      <div class="cat-item" data-cat="storage"><div class="icon">💾</div><div class="name">Storage</div></div>
+      <div class="cat-item" data-cat="psu"><div class="icon">🔌</div><div class="name">PSU</div></div>
+    </div>
+
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ================= USED MARKETPLACE ================= -->
+<section class="section market" id="market">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Used parts marketplace</h2>
+        <p>Buy second-hand parts from other builders, or list your own in a couple of clicks.</p>
+      </div>
+      <span class="tag">PEER TO PEER</span>
+    </div>
+
+    <div class="market-toolbar">
+      <div style="font-family:var(--mono);font-size:12px;color:var(--muted);" id="listingCount">0 active listings</div>
+      <button class="sell-btn" id="sellOpenBtn">+ Sell a Part</button>
+    </div>
+
+    <div class="listing-grid" id="listingGrid"></div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>How the used side works</h2>
+        <p>The same three steps for anyone listing or buying second-hand hardware.</p>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="num">01</div>
+        <h3>List your part</h3>
+        <p>Fill in the part name, condition, and price. It appears in the marketplace instantly for others to browse.</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">02</div>
+        <h3>Buyer requests it</h3>
+        <p>Interested buyers hit "Buy," which opens a chat with the seller to confirm price and handover details.</p>
+      </div>
+      <div class="flow-step">
+        <div class="num">03</div>
+        <h3>Meet, ship, or pickup</h3>
+        <p>Both sides agree on local pickup or shipping. Once confirmed, the listing is marked sold automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-row">
+    <div class="logo"><span class="dot" style="display:inline-block;width:6px;height:6px;background:#4FD1C5;border-radius:50%;margin-right:6px;"></span>CircuitYard</div>
+    <div>Demo prototype — built with HTML, CSS &amp; JavaScript</div>
+  </div>
+</footer>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3>YOUR CART</h3>
+    <button class="close-btn" id="cartCloseBtn">&times;</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="drawer-total"><span>Total</span><span id="cartTotal">₹0</span></div>
+    <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+  </div>
+</div>
+
+<!-- ================= SELL MODAL ================= -->
+<div class="modal-overlay" id="sellModalOverlay">
+  <div class="modal">
+    <h3>LIST A USED PART</h3>
+    <p class="sub">This demo adds your listing straight to the marketplace grid above.</p>
+    <form id="sellForm">
+      <div class="field">
+        <label>Part name</label>
+        <input type="text" id="fPartName" placeholder="e.g. Ryzen 5 5600X" required>
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <select id="fCategory">
+          <option>CPU</option><option>GPU</option><option>RAM</option>
+          <option>Storage</option><option>Motherboard</option><option>PSU</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Condition</label>
+        <select id="fCondition">
+          <option value="good">Good</option>
+          <option value="fair">Fair</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Price (₹)</label>
+        <input type="number" id="fPrice" placeholder="e.g. 9500" required>
+      </div>
+      <div class="field">
+        <label>Your name</label>
+        <input type="text" id="fSeller" placeholder="e.g. Rohan" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="sellCancelBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Post Listing</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ DATA ============ */
+const products = [
+  {id:1, cat:'cpu', name:'Ryzen 7 7800X3D', specs:'8 Core / 16 Thread · AM5', price:32999, icon:'🖥️'},
+  {id:2, cat:'cpu', name:'Core i5-13400F', specs:'10 Core / 16 Thread · LGA1700', price:16999, icon:'🖥️'},
+  {id:3, cat:'gpu', name:'RTX 4070 Super', specs:'12GB GDDR6X', price:54999, icon:'🎮'},
+  {id:4, cat:'gpu', name:'RX 7600 XT', specs:'16GB GDDR6', price:34999, icon:'🎮'},
+  {id:5, cat:'ram', name:'Corsair Vengeance 32GB', specs:'DDR5 · 6000MHz Kit', price:8499, icon:'📶'},
+  {id:6, cat:'ram', name:'Kingston Fury 16GB', specs:'DDR4 · 3200MHz Kit', price:3299, icon:'📶'},
+  {id:7, cat:'storage', name:'Samsung 990 Pro 1TB', specs:'PCIe 4.0 NVMe', price:8999, icon:'💾'},
+  {id:8, cat:'storage', name:'Crucial MX500 500GB', specs:'SATA III SSD', price:3199, icon:'💾'},
+  {id:9, cat:'psu', name:'Corsair RM750e', specs:'750W · 80+ Gold', price:6999, icon:'🔌'},
+  {id:10, cat:'psu', name:'DeepCool PF600', specs:'600W · 80+ Bronze', price:2899, icon:'🔌'},
+  {id:11, cat:'cpu', name:'Ryzen 5 5600G', specs:'6 Core / 12 Thread · AM4', price:10999, icon:'🖥️'},
+  {id:12, cat:'gpu', name:'RTX 3060 12GB', specs:'12GB GDDR6', price:24999, icon:'🎮'},
+];
+
+let listings = [
+  {id:101, name:'GTX 1660 Super', cat:'GPU', condition:'good', price:9500, seller:'Aman'},
+  {id:102, name:'B450 Tomahawk Max', cat:'Motherboard', condition:'good', price:4200, seller:'Priya'},
+  {id:103, name:'16GB DDR4 RAM Kit', cat:'RAM', condition:'fair', price:2100, seller:'Vikram'},
+  {id:104, name:'Cooler Master 500W PSU', cat:'PSU', condition:'fair', price:1800, seller:'Sanya'},
+  {id:105, name:'Ryzen 5 3600', cat:'CPU', condition:'good', price:7500, seller:'Karan'},
+  {id:106, name:'1TB HDD (Seagate)', cat:'Storage', condition:'good', price:1400, seller:'Neha'},
+];
+
+let cart = []; // {id, name, price, icon, qty}
+let currentFilter = 'all';
+
+/* ============ RENDER PRODUCTS ============ */
+const productGrid = document.getElementById('productGrid');
+function renderProducts(){
+  const list = currentFilter === 'all' ? products : products.filter(p => p.cat === currentFilter);
+  productGrid.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="card-media">${p.icon}</div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat.toUpperCase()}</div>
+        <div class="card-title">${p.name}</div>
+        <div class="card-specs">${p.specs}</div>
+        <div class="card-foot">
+          <span class="price">₹${p.price.toLocaleString('en-IN')}</span>
+          <button class="add-btn" data-id="${p.id}">+ Add</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+document.getElementById('catStrip').addEventListener('click', e => {
+  const item = e.target.closest('.cat-item');
+  if(!item) return;
+  document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+  item.classList.add('active');
+  currentFilter = item.dataset.cat;
+  renderProducts();
+});
+
+productGrid.addEventListener('click', e => {
+  const btn = e.target.closest('.add-btn');
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  const product = products.find(p => p.id === id);
+  addToCart(product);
+  btn.textContent = 'Added ✓';
+  btn.classList.add('added');
+  setTimeout(() => { btn.textContent = '+ Add'; btn.classList.remove('added'); }, 900);
+});
+
+/* ============ CART ============ */
+function addToCart(product){
+  const existing = cart.find(c => c.id === product.id);
+  if(existing){ existing.qty++; }
+  else { cart.push({id:product.id, name:product.name, price:product.price, icon:product.icon, qty:1}); }
+  renderCart();
+  showToast(`${product.name} added to cart`);
+}
+
+function removeFromCart(id){
+  cart = cart.filter(c => c.id !== id);
+  renderCart();
+}
+
+function renderCart(){
+  const drawerItems = document.getElementById('drawerItems');
+  const totalEl = document.getElementById('cartTotal');
+  const countEl = document.getElementById('cartCount');
+
+  if(cart.length === 0){
+    drawerItems.innerHTML = `<div class="drawer-empty">Your cart is empty.<br>Add parts from the shop to see them here.</div>`;
+  } else {
+    drawerItems.innerHTML = cart.map(c => `
+      <div class="drawer-item">
+        <div class="thumb">${c.icon}</div>
+        <div class="info">
+          <div class="t">${c.name} ${c.qty > 1 ? '× ' + c.qty : ''}</div>
+          <div class="p">₹${(c.price * c.qty).toLocaleString('en-IN')}</div>
+        </div>
+        <button class="remove-x" data-id="${c.id}">&times;</button>
+      </div>
+    `).join('');
+  }
+
+  const total = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+  totalEl.textContent = '₹' + total.toLocaleString('en-IN');
+  const count = cart.reduce((sum, c) => sum + c.qty, 0);
+  countEl.textContent = count;
+}
+
+document.getElementById('drawerItems').addEventListener('click', e => {
+  const btn = e.target.closest('.remove-x');
+  if(!btn) return;
+  removeFromCart(Number(btn.dataset.id));
+});
+
+document.getElementById('checkoutBtn').addEventListener('click', () => {
+  if(cart.length === 0){ showToast('Your cart is empty'); return; }
+  showToast('Order placed — this is a demo, no real payment taken');
+  cart = [];
+  renderCart();
+  closeDrawer();
+});
+
+/* Drawer open/close */
+const overlay = document.getElementById('overlay');
+const drawer = document.getElementById('cartDrawer');
+function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); }
+function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); }
+document.getElementById('cartOpenBtn').addEventListener('click', openDrawer);
+document.getElementById('cartCloseBtn').addEventListener('click', closeDrawer);
+overlay.addEventListener('click', () => { closeDrawer(); closeSellModal(); });
+
+/* ============ USED LISTINGS ============ */
+const listingGrid = document.getElementById('listingGrid');
+function renderListings(){
+  document.getElementById('listingCount').textContent = `${listings.length} active listings`;
+  listingGrid.innerHTML = listings.map(l => `
+    <div class="listing">
+      <div class="listing-top">
+        <div>
+          <div class="listing-title">${l.name}</div>
+          <div class="listing-meta">${l.cat}</div>
+        </div>
+        <span class="condition ${l.condition}">${l.condition.toUpperCase()}</span>
+      </div>
+      <div class="price">₹${l.price.toLocaleString('en-IN')}</div>
+      <div class="listing-foot">
+        <span class="seller">Seller: ${l.seller}</span>
+        <button class="buy-btn" data-id="${l.id}">Buy</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+listingGrid.addEventListener('click', e => {
+  const btn = e.target.closest('.buy-btn');
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  const item = listings.find(l => l.id === id);
+  showToast(`Request sent to ${item.seller} for "${item.name}"`);
+});
+
+/* ============ SELL MODAL ============ */
+const sellModalOverlay = document.getElementById('sellModalOverlay');
+function openSellModal(){ sellModalOverlay.classList.add('open'); }
+function closeSellModal(){ sellModalOverlay.classList.remove('open'); }
+document.getElementById('sellOpenBtn').addEventListener('click', openSellModal);
+document.getElementById('sellCancelBtn').addEventListener('click', closeSellModal);
+
+document.getElementById('sellForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('fPartName').value.trim();
+  const cat = document.getElementById('fCategory').value;
+  const condition = document.getElementById('fCondition').value;
+  const price = Number(document.getElementById('fPrice').value);
+  const seller = document.getElementById('fSeller').value.trim();
+  if(!name || !price || !seller) return;
+
+  listings.unshift({id: Date.now(), name, cat, condition, price, seller});
+  renderListings();
+  closeSellModal();
+  e.target.reset();
+  showToast('Your listing is live in the marketplace');
+});
+
+/* ============ TOAST ============ */
+let toastTimer;
+function showToast(msg){
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+/* ============ INIT ============ */
+renderProducts();
+renderCart();
+renderListings();
+</script>
+
+</body>
+</html>
