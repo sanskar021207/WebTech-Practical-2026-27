@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaTech Solutions</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fb;
+        }
+
+        /* HEADER SECTION */
+        header {
+            background-color: #142d4e;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .contact-btn {
+            background-color: #38bdf8;
+            color: #142d4e;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .contact-btn:hover {
+            background-color: white;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        main h1 {
+            color: #142d4e;
+            margin-bottom: 10px;
+        }
+
+        main p {
+            color: #555;
+        }
+
+        /* FOOTER SECTION */
+        footer {
+            background-color: #142d4e;
+            color: white;
+            padding: 45px 7% 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-box h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .footer-box h3 {
+            color: #38bdf8;
+            margin-bottom: 15px;
+        }
+
+        .footer-box p {
+            color: #d1d5db;
+            line-height: 1.7;
+        }
+
+        .footer-box ul {
+            list-style: none;
+        }
+
+        .footer-box ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-box ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+        }
+
+        .footer-box ul li a:hover {
+            color: #38bdf8;
+        }
+
+        .social-links a {
+            display: inline-block;
+            color: white;
+            background-color: #26466c;
+            text-decoration: none;
+            padding: 9px 12px;
+            border-radius: 5px;
+            margin: 5px 5px 0 0;
+        }
+
+        .social-links a:hover {
+            background-color: #38bdf8;
+            color: #142d4e;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #40536b;
+            margin-top: 35px;
+            padding-top: 20px;
+            color: #d1d5db;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 5px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER SECTION -->
+    <header>
+
+        <div class="logo">
+            Nova<span>Tech</span>
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Products</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <a href="#" class="contact-btn">Get Started</a>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div>
+            <h1>Welcome to NovaTech Solutions</h1>
+            <p>Innovative Technology for a Better Future.</p>
+        </div>
+    </main>
+
+
+    <!-- FOOTER SECTION -->
+    <footer>
+
+        <div class="footer-container">
+
+            <!-- Company Information -->
+            <div class="footer-box">
+                <h2>NovaTech Solutions</h2>
+                <p>
+                    We provide innovative technology solutions
+                    to help businesses grow and succeed in the
+                    digital world.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-box">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Career</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="footer-box">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">App Development</a></li>
+                    <li><a href="#">Software Solutions</a></li>
+                    <li><a href="#">Digital Marketing</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="footer-box">
+                <h3>Contact Information</h3>
+                <p>Email: info@novatech.com</p>
+                <p>Phone: +91 98765 43210</p>
+                <p>Address: Pune, Maharashtra, India</p>
+
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Copyright -->
+        <div class="copyright">
+            <p>
+                &copy; 2026 NovaTech Solutions.
+                All Rights Reserved.
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+</html>
