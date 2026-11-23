@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf0f6;
+        }
+
+        .container {
+            width: 450px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1d3557;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 9px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #1d3557;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #457b9d;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>College Registration Form</h2>
+    <p style="text-align:center;">Administration Department</p>
+
+    <form>
+
+        <label>Student Name:</label>
+        <input type="text" placeholder="Enter your full name" required>
+
+        <label>Date of Birth:</label>
+        <input type="date" required>
+
+        <label>Gender:</label>
+        <select required>
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label>Email:</label>
+        <input type="email" placeholder="Enter your email" required>
+
+        <label>Contact Number:</label>
+        <input type="tel" placeholder="Enter mobile number" required>
+
+        <label>Address:</label>
+        <textarea rows="3" placeholder="Enter your address"></textarea>
+
+        <label>Course:</label>
+        <select required>
+            <option value="">Select Course</option>
+            <option>BCA</option>
+            <option>MCA</option>
+            <option>BBA</option>
+            <option>MBA</option>
+            <option>B.Sc</option>
+            <option>B.Com</option>
+        </select>
+
+        <label>Year / Semester:</label>
+        <select required>
+            <option value="">Select Semester</option>
+            <option>Semester 1</option>
+            <option>Semester 2</option>
+            <option>Semester 3</option>
+            <option>Semester 4</option>
+        </select>
+
+        <label>Admission Date:</label>
+        <input type="date">
+
+        <label>Upload Documents:</label>
+        <input type="file">
+
+        <button type="submit">Register Now</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

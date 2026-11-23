@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #d4fcf0, #a6e6dc);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            width: 350px;
+            background-color: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #087f73;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #c5ded9;
+            border-radius: 8px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #087f73;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            background-color: #087f73;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #065e56;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        a {
+            color: #087f73;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="icon">🏥</div>
+
+        <h2>Patient Login</h2>
+        <p>Welcome to HealthCare Hospital</p>
+
+        <form>
+
+            <label>Patient ID / Email</label>
+            <input type="text" placeholder="Enter Patient ID or Email" required>
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter your password" required>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <div class="footer">
+            New Patient? <a href="#">Register Here</a>
+            <br><br>
+            <a href="#">Forgot Password?</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
