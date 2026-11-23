@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile – GearForge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap stub-header-row">
+      <a class="brand" href="index.html" aria-label="GearForge home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <rect x="7" y="7" width="18" height="18" rx="3" fill="#0B4A5E"/>
+          <path d="M12 4v3M16 4v3M20 4v3M12 25v3M16 25v3M20 25v3M4 12h3M4 16h3M4 20h3M25 12h3M25 16h3M25 20h3" stroke="#E3B02A" stroke-width="2" stroke-linecap="round"/>
+          <path d="M13 16h6M16 13v6" stroke="#F3F5F3" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>GearForge</span>
+      </a>
+      <nav class="stub-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories">PC Parts</a>
+        <a href="customize.html">Customize</a>
+        <a href="sell-buy.html">Sell / Buy</a>
+        <a href="repair.html">Repair</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section stub-hero">
+      <div class="wrap stub-hero-inner">
+        <span class="hero-badge" style="color:#0B4A5E;background:#DDEEF2;border-color:#0B4A5E;">Coming soon</span>
+        <h1>Your profile</h1>
+        <p>Order history, saved listings, your own listings and account settings will all live here.</p>
+        <a class="btn btn-primary" href="index.html">Back to home</a>
+      </div>
+    </section>
+    <section class="stub-features-wrap"><ul class="wrap stub-features" aria-label="What is coming"><li><strong>Order history</strong><span>Every part you have bought.</span></li><li><strong>Saved listings</strong><span>Parts you hearted for later.</span></li><li><strong>Your listings and settings</strong><span>Manage what you sell and your account.</span></li></ul></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-brand">GearForge</p>
+        <p class="footer-note">A demo marketplace. Listings, sellers and prices are sample data.</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="index.html#categories">PC Parts</a></li>
+          <li><a href="customize.html">Customize</a></li>
+          <li><a href="sell-buy.html">Sell / Buy</a></li>
+          <li><a href="repair.html">Repair</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> GearForge</p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

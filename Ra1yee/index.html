@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GearForge – Buy and sell PC parts</title>
+  <meta name="description" content="Buy, sell and swap new and used PC parts. Every listing shows its condition, its specs and which platforms it works with.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='7' y='7' width='18' height='18' rx='3' fill='%230B4A5E'/%3E%3Cpath d='M12 4v3M16 4v3M20 4v3M12 25v3M16 25v3M20 25v3M4 12h3M4 16h3M4 20h3M25 12h3M25 16h3M25 20h3' stroke='%23E3B02A' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ Header ============ -->
+  <header class="site-header" id="top">
+    <div class="wrap header-row">
+      <a class="brand" href="#top" aria-label="GearForge home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <rect x="7" y="7" width="18" height="18" rx="3" fill="#0B4A5E"/>
+          <path d="M12 4v3M16 4v3M20 4v3M12 25v3M16 25v3M20 25v3M4 12h3M4 16h3M4 20h3M25 12h3M25 16h3M25 20h3" stroke="#E3B02A" stroke-width="2" stroke-linecap="round"/>
+          <path d="M13 16h6M16 13v6" stroke="#F3F5F3" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>GearForge</span>
+      </a>
+
+      <form class="search" id="searchForm" role="search">
+        <label class="sr-only" for="searchInput">Search parts</label>
+        <input id="searchInput" type="search" placeholder="Search parts, e.g. RTX 4070 or DDR5 32GB" autocomplete="off">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="btn btn-gold header-sell" type="button" data-open-sell>Sell a part</button>
+        <a class="icon-btn" href="profile.html" aria-label="Your profile">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20c1.3-3.8 4.3-5.8 7.5-5.8s6.2 2 7.5 5.8"/></svg>
+        </a>
+        <button class="icon-btn" type="button" id="openCart" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="badge" id="cartCount" hidden>0</span>
+        </button>
+        <button class="icon-btn menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="navBar" aria-label="Menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-bar" id="navBar">
+      <nav class="wrap nav" aria-label="Main">
+        <a href="#top">Home</a>
+        <a href="#categories">PC Parts</a>
+        <a href="customize.html">Customize</a>
+        <a href="sell-buy.html">Sell / Buy</a>
+        <a href="repair.html">Repair</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ Hero ============ -->
+    <section class="hero" aria-labelledby="heroHeading">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <span class="hero-badge">⚡ Deal of the week</span>
+        <h1 id="heroHeading">Buy, sell and swap PC parts with people who build.</h1>
+        <p class="hero-lead">Every listing shows its condition, its specs and what it works with — browse new drops or list your own gear in minutes.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#listings">Browse parts</a>
+          <button class="btn btn-ghost" type="button" data-open-sell>Sell a part</button>
+        </div>
+        <div class="hero-sockets" role="group" aria-label="Shop by CPU socket">
+          <span>Building around a socket?</span>
+          <button type="button" data-socket="AM5">AM5</button>
+          <button type="button" data-socket="LGA1700">LGA1700</button>
+          <button type="button" data-socket="AM4">AM4</button>
+        </div>
+      </div>
+
+      <svg class="hero-visual" viewBox="0 0 460 360" aria-hidden="true" focusable="false">
+        <ellipse class="hv-shadow" cx="230" cy="330" rx="170" ry="16"/>
+        <rect class="hv-tower" x="300" y="70" width="110" height="230" rx="10"/>
+        <rect class="hv-tower-trim" x="300" y="70" width="14" height="230" rx="6"/>
+        <circle class="hv-fan" cx="355" cy="150" r="30"/>
+        <g class="hv-blades" style="transform-origin:355px 150px"><path class="hv-blade" transform="rotate(0 355 150)" d="M355 150L355 123A27 27 0 0 1 380.7 141.7Z"/><path class="hv-blade" transform="rotate(72 355 150)" d="M355 150L355 123A27 27 0 0 1 380.7 141.7Z"/><path class="hv-blade" transform="rotate(144 355 150)" d="M355 150L355 123A27 27 0 0 1 380.7 141.7Z"/><path class="hv-blade" transform="rotate(216 355 150)" d="M355 150L355 123A27 27 0 0 1 380.7 141.7Z"/><path class="hv-blade" transform="rotate(288 355 150)" d="M355 150L355 123A27 27 0 0 1 380.7 141.7Z"/></g><circle class="hv-fan-hub" cx="355" cy="150" r="7"/>
+        <circle class="hv-fan" cx="355" cy="230" r="30"/>
+        <g class="hv-blades" style="transform-origin:355px 230px"><path class="hv-blade" transform="rotate(0 355 230)" d="M355 230L355 203A27 27 0 0 1 380.7 221.7Z"/><path class="hv-blade" transform="rotate(72 355 230)" d="M355 230L355 203A27 27 0 0 1 380.7 221.7Z"/><path class="hv-blade" transform="rotate(144 355 230)" d="M355 230L355 203A27 27 0 0 1 380.7 221.7Z"/><path class="hv-blade" transform="rotate(216 355 230)" d="M355 230L355 203A27 27 0 0 1 380.7 221.7Z"/><path class="hv-blade" transform="rotate(288 355 230)" d="M355 230L355 203A27 27 0 0 1 380.7 221.7Z"/></g><circle class="hv-fan-hub" cx="355" cy="230" r="7"/>
+        <rect class="hv-monitor" x="30" y="60" width="250" height="160" rx="10"/>
+        <rect class="hv-screen" x="44" y="74" width="222" height="132" rx="4"/>
+        <path class="hv-grid" d="M44 106h222M44 140h222M44 174h222M88 74v132M155 74v132M222 74v132"/><path class="hv-swoosh" pathLength="100" d="M54 170 L120 110 L160 150 L250 80" /><g class="hv-nodes"><circle cx="54" cy="170" r="4"/><circle cx="120" cy="110" r="4"/><circle cx="160" cy="150" r="4"/><circle cx="250" cy="80" r="4"/></g><circle class="hv-led" cx="312" cy="284" r="3.5"/>
+        <rect class="hv-stand-neck" x="140" y="220" width="20" height="30"/>
+        <rect class="hv-stand-base" x="100" y="250" width="100" height="10" rx="5"/>
+        <rect class="hv-keyboard" x="40" y="275" width="190" height="34" rx="6"/>
+        <g class="hv-keys">
+          <rect x="52" y="284" width="14" height="8" rx="2"/><rect x="70" y="284" width="14" height="8" rx="2"/><rect x="88" y="284" width="14" height="8" rx="2"/><rect x="106" y="284" width="14" height="8" rx="2"/><rect x="124" y="284" width="14" height="8" rx="2"/><rect x="142" y="284" width="14" height="8" rx="2"/><rect x="160" y="284" width="14" height="8" rx="2"/><rect x="178" y="284" width="14" height="8" rx="2"/><rect x="196" y="284" width="14" height="8" rx="2"/>
+          <rect x="60" y="296" width="150" height="8" rx="2"/>
+        </g>
+      </svg>
+    </section>
+
+    <section class="trust" aria-label="Why buy on GearForge"><ul class="wrap trust-row"><li><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg><div><strong>Condition on every listing</strong><span>New, open box or used, always stated.</span></div></li><li><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 4v3M14 4v3M10 17v3M14 17v3M4 10h3M4 14h3M17 10h3M17 14h3"/></svg><div><strong>Compatibility tags</strong><span>See which sockets a part works with.</span></div></li><li><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg><div><strong>Rated sellers</strong><span>Ratings and sales counts on each card.</span></div></li><li><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg><div><strong>Anti-static shipping</strong><span>Parts go out wrapped and protected.</span></div></li></ul></section>
+
+    <!-- ============ Latest gadgets ============ -->
+    <section class="section section-tight" id="latest" aria-labelledby="latestHeading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="latestHeading">Latest gadgets</h2>
+          <p>Freshly listed — first come, first served.</p>
+        </div>
+        <div class="rec-row" id="latestRow" tabindex="0" role="region" aria-label="Latest listings, scroll for more"></div>
+      </div>
+    </section>
+
+    <!-- ============ Shop by brand ============ -->
+    <section class="section section-white" id="brands" aria-labelledby="brandsHeading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="brandsHeading">Shop by brand</h2>
+          <p>Jump straight to listings from a brand you trust.</p>
+        </div>
+        <div class="brand-grid" id="brandGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ Platform picker ============ -->
+    <section class="section quickmatch-section" id="quickmatch" aria-labelledby="quickHeading">
+      <div class="wrap quickmatch-wrap">
+        <div class="quickmatch-copy">
+          <h2 id="quickHeading">Find parts for your build</h2>
+          <p>Choose your CPU socket and we'll only show parts that fit it.</p>
+        </div>
+
+        <div class="picker" aria-labelledby="pickerHeading">
+          <h2 id="pickerHeading">Start with your platform</h2>
+          <p class="picker-sub">Which CPU socket are you building around?</p>
+
+          <fieldset class="platforms">
+            <legend class="sr-only">CPU socket</legend>
+            <label class="opt">
+              <input class="sr-only" type="radio" name="platform" value="AM5">
+              <span class="opt-body"><strong>AM5</strong><span>Ryzen 7000 and 9000</span></span>
+            </label>
+            <label class="opt">
+              <input class="sr-only" type="radio" name="platform" value="LGA1700">
+              <span class="opt-body"><strong>LGA1700</strong><span>Intel 12th to 14th Gen</span></span>
+            </label>
+            <label class="opt">
+              <input class="sr-only" type="radio" name="platform" value="AM4">
+              <span class="opt-body"><strong>AM4</strong><span>Ryzen 3000 and 5000</span></span>
+            </label>
+          </fieldset>
+
+          <div class="picker-result" id="pickerResult" aria-live="polite"></div>
+          <button class="btn btn-primary btn-block" type="button" id="applyPlatform" disabled>Show compatible parts</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Categories ============ -->
+    <section class="section" id="categories" aria-labelledby="catHeading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="catHeading">Shop by part</h2>
+          <p>Pick a category to filter the listings below.</p>
+        </div>
+        <div class="cat-grid" id="catGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ Listings ============ -->
+    <section class="section section-tight" id="listings" aria-labelledby="listHeading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="listHeading">Latest listings</h2>
+        </div>
+
+        <div class="filters">
+          <div class="chips" id="catChips" role="group" aria-label="Category"></div>
+
+          <div class="filter-row">
+            <label class="field">Condition
+              <select id="condSel">
+                <option value="all">Any condition</option>
+                <option value="new">New</option>
+                <option value="open">Open box</option>
+                <option value="used">Used</option>
+              </select>
+            </label>
+            <label class="field">Sort by
+              <select id="sortSel">
+                <option value="newest">Newest first</option>
+                <option value="price-asc">Price, low to high</option>
+                <option value="price-desc">Price, high to low</option>
+              </select>
+            </label>
+            <label class="field field-range">Max price <output id="priceOut" for="priceRange">Any price</output>
+              <input id="priceRange" type="range" min="0" max="1000" step="10" value="1000">
+            </label>
+            <label class="check"><input type="checkbox" id="savedOnly"> Saved only (<span id="savedCount">0</span>)</label>
+          </div>
+
+          <div class="filter-status">
+            <p id="resultCount" aria-live="polite"></p>
+            <span class="pill" id="platformPill" hidden>Works with <strong id="platformName"></strong>
+              <button type="button" id="clearPlatform" aria-label="Remove platform filter">×</button>
+            </span>
+            <span class="pill" id="brandPill" hidden>Brand: <strong id="brandName"></strong>
+              <button type="button" id="clearBrand" aria-label="Remove brand filter">×</button>
+            </span>
+            <button class="link-btn" type="button" id="clearFilters" hidden>Clear all filters</button>
+          </div>
+        </div>
+
+        <div class="grid" id="grid"></div>
+
+        <div class="empty" id="emptyState" hidden>
+          <h3>No parts match those filters</h3>
+          <p>Try a different category or raise the max price.</p>
+          <button class="btn btn-primary" type="button" id="emptyReset">Clear all filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Recommendations ============ -->
+    <section class="section section-white" id="recommendations" aria-labelledby="recHeading">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="recHeading">Recommended for you</h2>
+          <p id="recSub">Top-rated listings from the community.</p>
+        </div>
+        <div class="rec-row" id="recRow" tabindex="0" role="region" aria-label="Recommended listings, scroll for more"></div>
+      </div>
+    </section>
+
+    <!-- ============ How it works ============ -->
+    <section class="section section-white" id="how" aria-labelledby="howHeading">
+      <div class="wrap how-grid">
+        <div>
+          <h2 id="howHeading">Selling takes three steps</h2>
+          <ol class="steps">
+            <li>
+              <h3>Describe the part</h3>
+              <p>Add a title, the key specs, its condition and which platforms it works with.</p>
+            </li>
+            <li>
+              <h3>Set your price</h3>
+              <p>Check similar listings above and pick a number that sells.</p>
+            </li>
+            <li>
+              <h3>Ship when it sells</h3>
+              <p>Pack it in anti-static wrap and send it once the buyer has paid.</p>
+            </li>
+          </ol>
+        </div>
+        <div>
+          <h2>What the condition labels mean</h2>
+          <dl class="conditions">
+            <div><dt><span class="cond cond-new">New</span></dt><dd>Sealed in its original packaging and never used.</dd></div>
+            <div><dt><span class="cond cond-open">Open box</span></dt><dd>Opened but unused or barely used, with its original accessories.</dd></div>
+            <div><dt><span class="cond cond-used">Used</span></dt><dd>Has been in a working build. The seller has tested it.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Sell band ============ -->
+    <section class="sell-band" id="sell" aria-labelledby="sellBandHeading">
+      <div class="wrap sell-grid">
+        <div>
+          <h2 id="sellBandHeading">Got parts sitting in a drawer?</h2>
+          <p>List a graphics card, a spare kit of RAM or a whole old build in about two minutes.</p>
+        </div>
+        <button class="btn btn-dark" type="button" data-open-sell>List a part</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Social ============ -->
+  <section class="social-section" aria-labelledby="socialHeading">
+    <div class="wrap social-wrap">
+      <div>
+        <h2 id="socialHeading">Follow the build</h2>
+        <p>New listings, teardown photos and finished builds, posted as they come in.</p>
+      </div>
+      <ul class="social-links">
+        <li>
+          <a href="#" data-social="Instagram" aria-label="GearForge on Instagram">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+            <span>Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-social="YouTube" aria-label="GearForge on YouTube">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.3v5.4l4.8-2.7-4.8-2.7z" fill="currentColor" stroke="none"/></svg>
+            <span>YouTube</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-social="Discord" aria-label="GearForge on Discord">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9c2-1.3 3.8-1.8 6-1.8S14 7.7 18 9c1 2 1.4 4.3 1.2 7-1.6 1.2-3.2 1.8-4.8 2l-.8-1.4c.9-.3 1.6-.6 2.3-1.1-1.9.9-3.9 1.4-5.9 1.4s-4-.5-5.9-1.4c.7.5 1.4.8 2.3 1.1L5.6 18c-1.6-.2-3.2-.8-4.8-2C.6 13.3 1 11 2 9z"/><circle cx="9" cy="12.5" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12.5" r="1" fill="currentColor" stroke="none"/></svg>
+            <span>Discord</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" data-social="X" aria-label="GearForge on X">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20"/></svg>
+            <span>X</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <p class="footer-brand">GearForge</p>
+        <p class="footer-note">A demo marketplace. Listings, sellers and prices are sample data.</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul>
+          <li><a href="#categories">PC Parts</a></li>
+          <li><a href="customize.html">Customize</a></li>
+          <li><a href="sell-buy.html">Sell / Buy</a></li>
+          <li><a href="repair.html">Repair</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+      <p class="footer-copy">© <span id="year"></span> GearForge</p>
+    </div>
+  </footer>
+
+  <!-- ============ Quick view ============ -->
+  <dialog id="quickView" class="modal" aria-label="Part details">
+    <div class="dialog-inner">
+      <div class="dialog-head">
+        <h2 class="dialog-title">Part details</h2>
+        <button class="icon-btn" type="button" data-close aria-label="Close">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div id="quickBody"></div>
+    </div>
+  </dialog>
+
+  <!-- ============ Cart drawer ============ -->
+  <dialog id="cartDrawer" class="drawer" aria-labelledby="cartHeading">
+    <div class="dialog-inner drawer-inner">
+      <div class="dialog-head">
+        <h2 class="dialog-title" id="cartHeading">Your cart</h2>
+        <button class="icon-btn" type="button" data-close aria-label="Close cart">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="drawer-body">
+        <p id="cartEmpty">Your cart is empty. <a href="#listings" data-close>Browse parts</a></p>
+        <ul class="cart-list" id="cartList"></ul>
+      </div>
+      <div class="drawer-foot" id="cartFooter" hidden>
+        <p class="subtotal"><span>Subtotal</span><strong id="cartSubtotal"></strong></p>
+        <p class="fine">Shipping is added at checkout.</p>
+        <button class="btn btn-primary btn-block" type="button" id="checkoutBtn">Go to checkout</button>
+        <p class="fine" id="checkoutNote" role="status" hidden>Checkout isn't part of this demo yet.</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============ Sell form ============ -->
+  <dialog id="sellDialog" class="modal" aria-labelledby="sellHeading">
+    <form class="dialog-inner" id="sellForm">
+      <div class="dialog-head">
+        <h2 class="dialog-title" id="sellHeading">List a part</h2>
+        <button class="icon-btn" type="button" data-close aria-label="Close">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="form-grid">
+        <label class="field span-2">Title
+          <input name="title" type="text" required maxlength="80" placeholder="e.g. Ryzen 5 5600X, boxed">
+        </label>
+        <label class="field">Category
+          <select name="category" id="sellCategory" required></select>
+        </label>
+        <label class="field">Brand
+          <input name="brand" type="text" maxlength="30" placeholder="e.g. Corsair, ASUS">
+        </label>
+        <label class="field">Condition
+          <select name="condition" required>
+            <option value="used">Used</option>
+            <option value="open">Open box</option>
+            <option value="new">New</option>
+          </select>
+        </label>
+        <label class="field"><span id="sellPriceLabel">Price</span>
+          <input name="price" type="number" required min="1" max="100000" step="1" inputmode="numeric" placeholder="0">
+        </label>
+        <label class="field">Works with
+          <select name="compat">
+            <option value="any">Any platform</option>
+            <option value="AM5">AM5</option>
+            <option value="LGA1700">LGA1700</option>
+            <option value="AM4">AM4</option>
+          </select>
+        </label>
+        <label class="field span-2">Key specs
+          <input name="specs" type="text" maxlength="120" placeholder="e.g. 6 cores, 12 threads, 3.7 GHz base">
+        </label>
+        <label class="field span-2">Your seller name
+          <input name="seller" type="text" maxlength="30" placeholder="Shown on your listing">
+        </label>
+      </div>
+
+      <div class="dialog-foot">
+        <button class="btn btn-ghost-dark" type="button" data-close>Cancel</button>
+        <button class="btn btn-primary" type="submit">Publish listing</button>
+      </div>
+    </form>
+  </dialog>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Back to top" hidden><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
