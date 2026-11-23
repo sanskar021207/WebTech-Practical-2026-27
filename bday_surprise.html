@@ -1,0 +1,790 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Made For You</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Figtree:wght@400;500;700&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Layout: one night-sky world. Before 12 Nov a sealed gift + countdown. After: hero, marquee, cake, rage meter, ID card, memory wall, reasons, scratch coupons, letter, whack game, lanterns. */
+:root {
+  --night: #120e29;
+  --dusk: #261a4a;
+  --rose: #ff7aa8;
+  --gold: #ffc861;
+  --mint: #7be0c8;
+  --violet: #b69cff;
+  --ink: #fff3ea;
+  --ink-soft: #cdbfe6;
+  --card: rgba(255, 255, 255, 0.07);
+  --card-line: rgba(255, 255, 255, 0.16);
+  --paper: #fff6ec;
+  --paper-ink: #3a2347;
+  --display: "Shrikhand", "Georgia", serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hand: "Caveat", "Segoe Script", cursive;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body {
+  background: radial-gradient(120% 80% at 50% 0%, var(--dusk) 0%, var(--night) 60%) fixed;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+canvas.fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+#stars { z-index: 0; }
+#confetti { z-index: 60; }
+.wrap { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+h1, h2, h3, p { margin: 0; }
+h2 { font-family: var(--display); font-weight: 400; font-size: clamp(30px, 6vw, 46px); line-height: 1.15; text-wrap: balance; }
+.eyebrow { font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.section { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; padding-block: 76px 24px; }
+.section > p.lead { max-width: 52ch; color: var(--ink-soft); }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.btn {
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  color: #2a1235; font-weight: 700; border: 0; border-radius: 999px;
+  padding: 14px 28px; font-size: 17px;
+  box-shadow: 0 10px 30px rgba(255, 122, 168, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 14px 36px rgba(255, 200, 97, 0.4); }
+.btn:active { transform: scale(0.97); }
+.btn.ghost { background: var(--card); color: var(--ink); border: 1px solid var(--card-line); box-shadow: none; }
+.spark { position: fixed; z-index: 55; pointer-events: none; font-size: 18px; transform: translate(-50%, -50%); animation: spark 0.85s ease-out forwards; }
+@keyframes spark { to { transform: translate(-50%, -150%) scale(0.4) rotate(40deg); opacity: 0; } }
+
+/* ---------- locked ---------- */
+#lock { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; padding-block: 56px; }
+#lock h1 { font-family: var(--display); font-weight: 400; font-size: clamp(36px, 9vw, 64px); line-height: 1.1; text-wrap: balance; }
+#lock p { color: var(--ink-soft); max-width: 40ch; }
+.gift { width: 150px; height: 150px; position: relative; animation: wobble 3.2s ease-in-out infinite; filter: drop-shadow(0 18px 30px rgba(0,0,0,0.45)); }
+.gift .box { position: absolute; left: 12px; right: 12px; bottom: 0; height: 92px; background: linear-gradient(160deg, var(--rose), #e0558a); border-radius: 10px; }
+.gift .lid { position: absolute; left: 4px; right: 4px; bottom: 82px; height: 30px; background: linear-gradient(160deg, #ff93b8, var(--rose)); border-radius: 8px; }
+.gift .rib-v { position: absolute; left: 50%; width: 22px; margin-left: -11px; top: 38px; bottom: 0; background: var(--gold); }
+.gift .bow { position: absolute; left: 50%; top: 6px; width: 56px; height: 36px; margin-left: -28px; }
+.gift .bow::before, .gift .bow::after { content: ""; position: absolute; top: 0; width: 28px; height: 30px; border: 7px solid var(--gold); border-radius: 50% 50% 50% 0; }
+.gift .bow::before { left: -4px; transform: rotate(-20deg); }
+.gift .bow::after { right: -4px; transform: scaleX(-1) rotate(-20deg); }
+@keyframes wobble { 0%, 100% { transform: rotate(-3deg) translateY(0); } 50% { transform: rotate(3deg) translateY(-8px); } }
+.count { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; width: min(100%, 440px); }
+.count div { background: var(--card); border: 1px solid var(--card-line); border-radius: 18px; padding: 14px 4px; backdrop-filter: blur(6px); }
+.count b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(28px, 8vw, 40px); line-height: 1.1; font-variant-numeric: tabular-nums; color: var(--gold); }
+.count span { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); }
+.hint { font-family: var(--hand); font-size: 24px; color: var(--mint); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; padding-block: 72px 36px; overflow: hidden; }
+.hero .hb { font-size: clamp(18px, 4vw, 26px); color: var(--ink-soft); letter-spacing: 0.3em; }
+.hero h1 { font-family: var(--display); font-weight: 400; font-size: clamp(64px, 19vw, 150px); line-height: 1; text-wrap: balance;
+  background: linear-gradient(100deg, var(--rose), var(--gold), var(--mint), var(--violet), var(--rose)); background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 7s linear infinite; }
+@keyframes shine { to { background-position: 300% 0; } }
+.hero .aka { font-family: var(--hand); font-size: clamp(26px, 5vw, 36px); color: var(--mint); }
+.hero .sub { max-width: 46ch; color: var(--ink-soft); font-size: 19px; }
+.hero .date { font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-size: 15px; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+.balloons { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.hero > *:not(.balloons) { position: relative; z-index: 1; }
+.balloon { position: absolute; bottom: -140px; width: 54px; height: 68px; border-radius: 50% 50% 48% 48%; animation: rise linear infinite; opacity: 0.85; }
+.balloon::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: 70px; background: rgba(255,255,255,0.35); }
+@keyframes rise { 0% { transform: translateY(0) translateX(0) rotate(-4deg); } 50% { transform: translateY(-48vh) translateX(18px) rotate(4deg); } 100% { transform: translateY(-110vh) translateX(-10px) rotate(-4deg); } }
+
+.marq { overflow: hidden; border-block: 1px solid var(--card-line); background: rgba(255,255,255,0.04); transform: rotate(-1.2deg); margin-block: 18px 0; }
+.marq .track { display: inline-flex; white-space: nowrap; animation: slide 26s linear infinite; padding-block: 12px; }
+.marq span { font-family: var(--display); font-size: 26px; padding-inline: 18px; color: var(--ink); }
+.marq span:nth-child(3n+1) { color: var(--rose); }
+.marq span:nth-child(3n+2) { color: var(--gold); }
+.marq span:nth-child(3n) { color: var(--mint); }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ---------- cake ---------- */
+.cakebtn { background: none; border: 0; padding: 0; width: min(100%, 340px); }
+.cake { width: 100%; height: auto; overflow: visible; }
+.flame { transform-origin: center bottom; transform-box: fill-box; animation: flicker 0.35s ease-in-out infinite alternate; transition: opacity 0.4s, transform 0.4s; }
+@keyframes flicker { from { transform: scale(1, 1) rotate(-3deg); } to { transform: scale(0.88, 1.12) rotate(3deg); } }
+.out .flame { opacity: 0; transform: scale(0); animation: none; }
+.smoke { opacity: 0; }
+.out .smoke { animation: puff 1.8s ease-out forwards; }
+@keyframes puff { 0% { opacity: 0.7; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-34px); } }
+.wishline { min-height: 2.4em; font-family: var(--hand); font-size: 30px; color: var(--mint); }
+
+/* ---------- rage meter ---------- */
+.rage { width: min(100%, 560px); background: var(--card); border: 1px solid var(--card-line); border-radius: 28px; padding: 26px 22px; display: flex; flex-direction: column; gap: 16px; align-items: center; backdrop-filter: blur(6px); }
+.rage.shake { animation: shake 0.5s; }
+@keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-12px) rotate(-1deg); } 40% { transform: translateX(12px) rotate(1deg); } 60% { transform: translateX(-8px); } 80% { transform: translateX(8px); } }
+.meter { width: 100%; height: 22px; border-radius: 999px; background: rgba(255,255,255,0.1); overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--mint), var(--gold), var(--rose)); transition: width 0.45s cubic-bezier(.2,.8,.2,1); }
+.rage .pct { font-family: var(--display); font-size: 28px; color: var(--gold); font-variant-numeric: tabular-nums; }
+.rage .line { min-height: 3.4em; font-size: 19px; color: var(--ink); max-width: 38ch; }
+
+/* ---------- ID card ---------- */
+.idcard { position: relative; width: min(100%, 540px); text-align: left; border-radius: 26px; padding: 22px; color: #2a1235; background: linear-gradient(135deg, #ffd6e4 0%, #ffe9b8 50%, #c9f4e8 100%); box-shadow: 0 30px 60px rgba(0,0,0,0.45); overflow: hidden; transform: rotate(-1.5deg); }
+.idcard::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%); background-size: 250% 100%; animation: holo 4.5s ease-in-out infinite; pointer-events: none; }
+@keyframes holo { 0% { background-position: 150% 0; } 100% { background-position: -100% 0; } }
+.idcard .top { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; opacity: 0.75; }
+.idcard .body { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; margin-top: 16px; align-items: start; }
+.idcard .face { width: 110px; height: 110px; border-radius: 22px; background: linear-gradient(135deg, var(--rose), var(--violet)); display: grid; place-items: center; font-family: var(--display); font-size: 62px; color: #fff; }
+.idcard dl { margin: 0; display: grid; gap: 6px; }
+.idcard dt { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; font-weight: 700; }
+.idcard dd { margin: 0 0 4px; font-weight: 700; font-size: 17px; line-height: 1.25; }
+.idcard .bars { height: 34px; margin-top: 12px; border-radius: 6px; background: repeating-linear-gradient(90deg, #2a1235 0 2px, transparent 2px 5px, #2a1235 5px 6px, transparent 6px 10px); opacity: 0.8; }
+.idcard .sign { font-family: var(--hand); font-size: 26px; margin-top: 6px; }
+@media (max-width: 440px) { .idcard .body { grid-template-columns: 1fr; } }
+
+/* ---------- memory wall ---------- */
+.wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 34px 26px; width: 100%; padding: 14px 6px; }
+.polaroid { position: relative; background: var(--paper); color: var(--paper-ink); border: 0; padding: 12px 12px 14px; text-align: center; border-radius: 4px; box-shadow: 0 16px 34px rgba(0,0,0,0.45); transform: rotate(var(--r, 0deg)); transition: transform 0.35s cubic-bezier(.2,.8,.2,1), box-shadow 0.35s; }
+.polaroid::before { content: ""; position: absolute; top: -14px; left: 50%; width: 78px; height: 26px; margin-left: -39px; background: rgba(255, 200, 97, 0.7); transform: rotate(-3deg); }
+.polaroid:hover, .polaroid:focus-visible { transform: rotate(0deg) scale(1.07) translateY(-6px); box-shadow: 0 26px 50px rgba(0,0,0,0.55); z-index: 2; }
+.polaroid .pic { display: block; aspect-ratio: 1 / 1; width: 100%; border-radius: 2px; overflow: hidden; background: linear-gradient(135deg, var(--rose), var(--violet)); }
+.polaroid .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.polaroid .pic.empty { display: grid; place-items: center; padding: 12px; font-family: var(--hand); font-size: 22px; line-height: 1.1; color: #fff; }
+.polaroid .cap { display: block; margin-top: 10px; font-family: var(--hand); font-size: 24px; line-height: 1.1; }
+.polaroid .dt { display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.55; margin-top: 2px; }
+#lb { position: fixed; inset: 0; z-index: 70; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: rgba(10, 6, 24, 0.9); padding: 24px 16px; }
+#lb img { max-width: min(100%, 900px); max-height: 74vh; border: 10px solid var(--paper); border-bottom-width: 30px; border-radius: 4px; }
+#lb p { font-family: var(--hand); font-size: 30px; color: var(--ink); text-align: center; }
+
+/* ---------- reasons ---------- */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; width: 100%; }
+.flip { perspective: 900px; background: none; border: 0; padding: 0; height: 220px; text-align: center; }
+.flip .in { position: relative; display: block; width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(.2,.8,.2,1); transform-style: preserve-3d; }
+.flip.on .in { transform: rotateY(180deg); }
+.flip .face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 24px; border: 1px solid var(--card-line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 22px; }
+.flip .front { background: var(--card); backdrop-filter: blur(6px); }
+.flip .front .ico { font-size: 44px; line-height: 1; }
+.flip .front h3 { font-family: var(--display); font-weight: 400; font-size: 24px; }
+.flip .front small { color: var(--ink-soft); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; }
+.flip .back { transform: rotateY(180deg); color: #2a1235; font-size: 17px; font-weight: 500; }
+.flip:nth-child(3n+1) .back { background: linear-gradient(150deg, var(--rose), #ffb0c9); }
+.flip:nth-child(3n+2) .back { background: linear-gradient(150deg, var(--gold), #ffe3a3); }
+.flip:nth-child(3n) .back { background: linear-gradient(150deg, var(--mint), #b9f3e5); }
+
+/* ---------- scratch coupons ---------- */
+.coupons { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 16px; width: 100%; }
+.coupon { position: relative; height: 150px; border-radius: 20px; overflow: hidden; background: var(--paper); color: var(--paper-ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 14px 18px; border: 2px dashed rgba(58,35,71,0.35); text-align: center; }
+.coupon .t { font-family: var(--display); font-size: 21px; line-height: 1.15; }
+.coupon .s { font-size: 13px; opacity: 0.65; }
+.coupon canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; transition: opacity 0.6s; }
+.coupon.done canvas { opacity: 0; pointer-events: none; }
+
+/* ---------- letter ---------- */
+.env { position: relative; width: min(100%, 560px); }
+.env .seal { background: linear-gradient(135deg, var(--rose), var(--gold)); color: #2a1235; border: 0; border-radius: 22px; width: 100%; padding: 34px 20px; font-family: var(--display); font-size: 28px; transition: transform 0.25s; }
+.env .seal:hover { transform: scale(1.02) rotate(-0.6deg); }
+.letter { background: var(--paper); color: var(--paper-ink); border-radius: 22px; padding: clamp(22px, 5vw, 40px); text-align: left; width: 100%; box-shadow: 0 24px 60px rgba(0,0,0,0.45); animation: unfold 0.7s cubic-bezier(.2,.8,.2,1); }
+.letter p { font-family: var(--hand); font-size: clamp(23px, 4.6vw, 28px); line-height: 1.45; min-height: 1.45em; white-space: pre-wrap; }
+.letter p + p { margin-top: 10px; }
+@keyframes unfold { from { transform: scaleY(0.2) translateY(-30px); opacity: 0; transform-origin: top; } to { transform: none; opacity: 1; } }
+
+/* ---------- whack game ---------- */
+.arena { position: relative; width: min(100%, 440px); display: flex; flex-direction: column; gap: 14px; }
+.hud { display: flex; justify-content: space-between; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
+.holes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hole { position: relative; aspect-ratio: 1 / 1; border: 0; padding: 0; border-radius: 50% 50% 22px 22px / 60% 60% 22px 22px; background: radial-gradient(ellipse at 50% 85%, #05030f 0 55%, #1b1236 56%); overflow: hidden; touch-action: manipulation; }
+.mole { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: clamp(44px, 13vw, 64px); line-height: 1; transform: translateY(110%); transition: transform 0.14s ease-out; pointer-events: none; }
+.hole.up .mole { transform: translateY(8%); }
+.hole.hit .mole { transform: translateY(8%) scale(0.8) rotate(-18deg); filter: grayscale(0.6); }
+.hole .bam { position: absolute; top: 8px; left: 0; right: 0; text-align: center; font-family: var(--display); color: var(--gold); opacity: 0; font-size: 22px; pointer-events: none; }
+.hole.hit .bam { animation: bam 0.5s ease-out; }
+@keyframes bam { 0% { opacity: 1; transform: scale(0.6); } 100% { opacity: 0; transform: translateY(-16px) scale(1.4); } }
+.gover { position: absolute; inset: -6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 20px; z-index: 4; background: rgba(18, 14, 41, 0.86); border-radius: 24px; text-align: center; }
+.gover b { font-family: var(--display); font-weight: 400; font-size: 32px; }
+.gover p { color: var(--ink-soft); max-width: 30ch; }
+
+/* ---------- lanterns ---------- */
+.lantern-form { display: flex; flex-wrap: wrap; gap: 10px; width: min(100%, 520px); justify-content: center; }
+.lantern-form input { flex: 1 1 220px; min-width: 0; background: var(--card); border: 1px solid var(--card-line); border-radius: 999px; padding: 14px 20px; color: var(--ink); font: inherit; }
+.lantern-form input::placeholder { color: var(--ink-soft); }
+.sky { position: relative; width: 100%; height: 300px; overflow: hidden; border-radius: 28px; border: 1px solid var(--card-line); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,200,97,0.07)); }
+.lantern { position: absolute; bottom: -90px; width: 84px; padding: 10px 6px 14px; border-radius: 14px 14px 20px 20px; background: linear-gradient(180deg, #ffd98a, #ff9a5c); color: #4a1d2b; font-family: var(--hand); font-size: 17px; line-height: 1.1; font-weight: 700; text-align: center; box-shadow: 0 0 40px rgba(255, 190, 90, 0.7); animation: float 11s ease-in forwards; overflow-wrap: anywhere; }
+@keyframes float { 0% { transform: translateY(0) rotate(-3deg); opacity: 1; } 60% { opacity: 1; } 100% { transform: translateY(-420px) translateX(20px) rotate(4deg); opacity: 0; } }
+
+footer { position: relative; z-index: 1; text-align: center; padding-block: 90px 70px; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+footer .big { font-family: var(--display); font-size: clamp(30px, 7vw, 52px); line-height: 1.15; text-wrap: balance; }
+footer .hand { font-family: var(--hand); font-size: 30px; color: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .balloon, .spark { display: none; }
+}
+</style>
+
+<canvas id="stars" class="fx" aria-hidden="true"></canvas>
+<canvas id="confetti" class="fx" aria-hidden="true"></canvas>
+
+<!-- Locked -->
+<main id="lock" class="wrap">
+  <div class="gift" aria-hidden="true"><div class="box"></div><div class="lid"></div><div class="rib-v"></div><div class="bow"></div></div>
+  <h1>Not yet, Aikari!</h1>
+  <p>Ragebaiter made something for 02. It opens on the 12th of November, the second your birthday begins.</p>
+  <div class="count" role="timer" aria-label="Time until it opens">
+    <div><b id="cd">00</b><span>days</span></div>
+    <div><b id="ch">00</b><span>hours</span></div>
+    <div><b id="cm">00</b><span>minutes</span></div>
+    <div><b id="cs">00</b><span>seconds</span></div>
+  </div>
+  <p class="hint">No peeking. Come back on your day.</p>
+</main>
+
+<!-- Unlocked -->
+<div id="site" hidden>
+  <div class="wrap">
+    <header class="hero">
+      <div class="balloons" id="balloons" aria-hidden="true"></div>
+      <p class="hb">HAPPY BIRTHDAY</p>
+      <h1 id="who">Aikari</h1>
+      <p class="aka">a.k.a. 02, the one and only</p>
+      <p class="date">12 November</p>
+      <p class="sub">Today the whole page is yours. One certified Ragebaiter built every bit of it for one very special Aikari.</p>
+      <div class="actions">
+        <button class="btn" id="boom" type="button">Throw confetti</button>
+        <button class="btn ghost" id="tune" type="button">Play your song</button>
+      </div>
+    </header>
+
+    <div class="marq" aria-hidden="true"><div class="track" id="marq"></div></div>
+
+    <section class="section" id="cake-sec">
+      <p class="eyebrow">First things first</p>
+      <h2>Make a wish and blow out the candles</h2>
+      <p class="lead">Close your eyes, think of something you really want this year, then tap the cake.</p>
+      <button id="cakebtn" class="cakebtn" type="button" aria-label="Blow out the candles">
+        <svg class="cake" id="cake" viewBox="0 0 300 270" role="img" aria-label="A three-tier birthday cake with five candles">
+          <ellipse cx="150" cy="248" rx="140" ry="14" fill="#000" opacity="0.25"/>
+          <rect x="30" y="175" width="240" height="68" rx="14" fill="#ff7aa8"/>
+          <rect x="62" y="128" width="176" height="52" rx="12" fill="#ffc861"/>
+          <rect x="94" y="88" width="112" height="44" rx="12" fill="#7be0c8"/>
+          <g fill="#fff6ec">
+            <rect x="30" y="175" width="240" height="12" rx="6"/>
+            <circle cx="60" cy="190" r="8"/><circle cx="110" cy="192" r="9"/><circle cx="160" cy="190" r="8"/><circle cx="210" cy="192" r="9"/><circle cx="250" cy="190" r="7"/>
+            <rect x="62" y="128" width="176" height="11" rx="5"/>
+            <circle cx="92" cy="142" r="7"/><circle cx="140" cy="143" r="8"/><circle cx="190" cy="142" r="7"/>
+            <rect x="94" y="88" width="112" height="10" rx="5"/>
+            <circle cx="120" cy="100" r="6"/><circle cx="170" cy="101" r="7"/>
+          </g>
+          <g fill="#ff7aa8"><circle cx="85" cy="215" r="5"/><circle cx="150" cy="212" r="5"/><circle cx="215" cy="215" r="5"/></g>
+          <g>
+            <rect x="113" y="56" width="7" height="32" rx="2" fill="#fff"/><rect x="113" y="64" width="7" height="5" fill="#ff7aa8"/><rect x="113" y="74" width="7" height="5" fill="#ff7aa8"/>
+            <rect x="131" y="56" width="7" height="32" rx="2" fill="#fff"/><rect x="131" y="64" width="7" height="5" fill="#7be0c8"/><rect x="131" y="74" width="7" height="5" fill="#7be0c8"/>
+            <rect x="147" y="56" width="7" height="32" rx="2" fill="#fff"/><rect x="147" y="64" width="7" height="5" fill="#ffc861"/><rect x="147" y="74" width="7" height="5" fill="#ffc861"/>
+            <rect x="163" y="56" width="7" height="32" rx="2" fill="#fff"/><rect x="163" y="64" width="7" height="5" fill="#ff7aa8"/><rect x="163" y="74" width="7" height="5" fill="#ff7aa8"/>
+            <rect x="181" y="56" width="7" height="32" rx="2" fill="#fff"/><rect x="181" y="64" width="7" height="5" fill="#7be0c8"/><rect x="181" y="74" width="7" height="5" fill="#7be0c8"/>
+          </g>
+          <g>
+            <ellipse class="flame" cx="116.5" cy="45" rx="6" ry="11" fill="#ffb347"/>
+            <ellipse class="flame" cx="134.5" cy="45" rx="6" ry="11" fill="#ffb347" style="animation-delay:.1s"/>
+            <ellipse class="flame" cx="150.5" cy="45" rx="6" ry="11" fill="#ffb347" style="animation-delay:.2s"/>
+            <ellipse class="flame" cx="166.5" cy="45" rx="6" ry="11" fill="#ffb347" style="animation-delay:.05s"/>
+            <ellipse class="flame" cx="184.5" cy="45" rx="6" ry="11" fill="#ffb347" style="animation-delay:.15s"/>
+          </g>
+          <g class="smoke" fill="none" stroke="#cdbfe6" stroke-width="2" stroke-linecap="round">
+            <path d="M116 50 q-6 -12 0 -22"/><path d="M134 50 q6 -12 0 -22"/><path d="M150 50 q-6 -12 0 -22"/><path d="M166 50 q6 -12 0 -22"/><path d="M184 50 q-6 -12 0 -22"/>
+          </g>
+        </svg>
+      </button>
+      <p class="wishline" id="wishline" aria-live="polite">Tap the cake</p>
+      <button class="btn ghost" id="relight" type="button" hidden>Light them again</button>
+    </section>
+
+    <section class="section" id="ragesec">
+      <p class="eyebrow">Birthday tradition</p>
+      <h2>Ragebait me</h2>
+      <p class="lead">You call me Ragebaiter, so today I am officially working for you. Press the button and see how far I get.</p>
+      <div class="rage" id="rage">
+        <div class="pct" id="pct">0%</div>
+        <div class="meter" role="progressbar" aria-label="Rage meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="meter"><i id="meterfill"></i></div>
+        <p class="line" id="rageline" aria-live="polite">Rage meter: calm. Suspiciously calm.</p>
+        <button class="btn" id="ragebtn" type="button">Ragebait me</button>
+      </div>
+    </section>
+
+    <section class="section" id="idsec">
+      <p class="eyebrow">Now official</p>
+      <h2>Your Aikari card</h2>
+      <div class="idcard">
+        <div class="top"><span>Best friend registry</span><span>No. 0001</span></div>
+        <div class="body">
+          <div class="face" aria-hidden="true">A</div>
+          <dl>
+            <dt>Name</dt><dd>02</dd>
+            <dt>Alias</dt><dd>Aikari</dd>
+            <dt>Superpower</dt><dd>Making every day better</dd>
+            <dt>Weakness</dt><dd>Ragebaiter</dd>
+            <dt>Status</dt><dd>Best friend, non-refundable</dd>
+          </dl>
+        </div>
+        <div class="bars" aria-hidden="true"></div>
+        <p class="sign">Issued by Ragebaiter. Valid forever.</p>
+      </div>
+    </section>
+
+    <section class="section" id="wallsec">
+      <p class="eyebrow">Us</p>
+      <h2>Our memory wall</h2>
+      <p class="lead">Every picture here is a day I would happily live again. Tap one to look closer.</p>
+      <div class="wall" id="wall"></div>
+    </section>
+
+    <section class="section" id="reasons">
+      <p class="eyebrow">A few of my reasons</p>
+      <h2>Why you are my person</h2>
+      <p class="lead">Tap a card to turn it over.</p>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section class="section" id="couponsec">
+      <p class="eyebrow">Your gifts, no wrapping needed</p>
+      <h2>Scratch to reveal</h2>
+      <p class="lead">Four coupons, all valid today and every day after. Scratch with your finger or mouse.</p>
+      <div class="coupons" id="coupons"></div>
+    </section>
+
+    <section class="section" id="letter">
+      <p class="eyebrow">Read this slowly</p>
+      <h2>A letter for you</h2>
+      <div class="env" id="env">
+        <button class="seal" id="seal" type="button">Open your letter</button>
+      </div>
+    </section>
+
+    <section class="section" id="gamesec">
+      <p class="eyebrow">Revenge time</p>
+      <h2>Whack the Ragebaiter</h2>
+      <p class="lead">You have 25 seconds. Hit me every time I pop up. Go on, you have earned it.</p>
+      <div class="arena" id="arena">
+        <div class="hud"><span>Hits: <span id="score">0</span></span><span>Time: <span id="time">25</span></span></div>
+        <div class="holes" id="holes"></div>
+        <div class="gover" id="gover"><b>Ready?</b><p>Tap the face when it pops out of the hole.</p><button class="btn" id="gstart" type="button">Start</button></div>
+      </div>
+    </section>
+
+    <section class="section" id="wishes">
+      <p class="eyebrow">Send them up</p>
+      <h2>Release a wish lantern</h2>
+      <p class="lead">Type a wish for your year. It floats away into the night sky.</p>
+      <form class="lantern-form" id="lform">
+        <input id="wishin" type="text" maxlength="40" placeholder="I wish for..." autocomplete="off" aria-label="Your wish">
+        <button class="btn" type="submit">Release</button>
+      </form>
+      <div class="sky" id="sky" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <footer>
+    <p class="big">Happy Birthday, Aikari.</p>
+    <p class="hand">Love, your one and only Ragebaiter.</p>
+    <button class="btn" id="boom2" type="button">One more burst</button>
+  </footer>
+</div>
+
+<div id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo">
+  <img id="lbimg" alt="">
+  <p id="lbcap"></p>
+  <button class="btn ghost" id="lbclose" type="button">Close</button>
+</div>
+
+<script>
+(function () {
+  /* ---- Settings: change these and republish ---- */
+  var UNLOCK_AT = new Date("2026-11-12T00:00:00+05:30").getTime();
+  var PREVIEW_HASH = "#preview-sk26";   // open the link with this to see the unlocked page early
+  // Add photos here: { src: "data:image/jpeg;base64,...", caption: "Beach day", date: "Aug 2024" }
+  var MEMORIES = [
+  { src: "together1.webp", caption: "Hehehehe", date: "OCT 12" },
+  { src: "bappa.webp", caption: "Pandal Hopping", date: "SEP 14" }, 
+  { src: "stare.jpeg", caption: "Caught someone staring", date: "" },
+  { src: "book.webp", caption: "U love reading books i enjoy Adoring you", date: "" }
+];
+  var LETTER = [
+    "Dear Aikari,",
+    "I don't know how to describe you, because I can't explain how beautiful my life has got since I met you. I know I have said this multiple times, but tekko jitna thank you bolu utna kam pad jayega yar.",
+    "Aur tujhe lagta hai ki you have done nothing for me, but tune jitna kiya hai wahi mere liye bohot kuch hai. Even your smile makes me happy. You have given me happiness.",
+    "Even your presence makes me feel happy. I can't explain how special you are to me. Saari duniya ki dictionary bhi use kar lu, phir bhi tekko describe karne ke liye words kam pad jayenge.",
+    "Tu mere liye sirf best friend nahi hai, Aikari. Tu woh insaan hai jiske saath main bina soche kuch bhi bol sakta hu.",
+    "Aur haan, tu mujhe Ragebaiter bolti hai na? Chalega. Kyunki tere muh se woh bhi pyaara lagta hai.",
+    "Bas itna chahta hu ki tu hamesha aise hi hasti rahe, aur tera har wish is saal poora ho. Main hamesha tere saath hu.",
+    "Happy Birthday, 02. Tu meri life ka sabse accha part hai.",
+    "Hamesha tera, Ragebaiter"
+  ];
+  var REASONS = [
+    ["✨", "Your laugh", "It is the best sound in the world. It fixes my mood in seconds."],
+    ["🤝", "You show up", "Every time. No excuses, no questions. You are just there."],
+    ["😤", "You survive me", "A full day of Ragebaiting and you still pick up my call. Respect."],
+    ["😂", "Our jokes", "Nobody else would get them, and that is exactly why they are perfect."],
+    ["💛", "Your kindness", "You care so quietly and so completely that people feel it before you say a word."],
+    ["🌈", "Ordinary days", "Anything turns into a good memory when you are there."]
+  ];
+  var COUPONS = [
+    ["No ragebait for 24 hours", "*lasts until you annoy me first"],
+    ["One movie night, my treat", "You pick the film. No complaints."],
+    ["Unlimited rant session", "I will say “wow” at all the right moments"],
+
+  ];
+  var RAGE_LINES = [
+    "KItni Bhi Koshis kro Apki height utni hi rahegi too sad.",
+    "Fun fact: you are older than yesterday.",
+    "Your phone is at 1%. Guess who is not lending a charger.",
+    "I am not saying you are slow, but the cake melted waiting for you.",
+    "Reminder: I was right. Every single time.",
+    "I ate the last slice. Obviously.",
+    "Plot twist: the gift is this website.",
+    "Typing... typing... typing... deleted. K.",
+    "Your birthday is once a year. My jokes are year-round.",
+    "I said I was five minutes away. I have not left yet."
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var COLORS = ["#ff7aa8", "#ffc861", "#7be0c8", "#fff3ea", "#b69cff"];
+
+  /* ---- Starfield ---- */
+  var sc = $("stars"), sx = sc.getContext("2d"), stars = [];
+  function sizeStars() {
+    sc.width = innerWidth; sc.height = innerHeight; stars = [];
+    for (var i = 0; i < Math.min(160, innerWidth / 6); i++) stars.push({ x: Math.random() * sc.width, y: Math.random() * sc.height, r: Math.random() * 1.5 + 0.3, p: Math.random() * 6.28, s: Math.random() * 0.03 + 0.01 });
+  }
+  function drawStars() {
+    sx.clearRect(0, 0, sc.width, sc.height);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i]; s.p += s.s;
+      sx.globalAlpha = 0.35 + 0.55 * Math.abs(Math.sin(s.p)); sx.fillStyle = "#fff3ea";
+      sx.beginPath(); sx.arc(s.x, s.y, s.r, 0, 6.283); sx.fill();
+    }
+    if (!reduce) requestAnimationFrame(drawStars);
+  }
+  sizeStars(); drawStars(); addEventListener("resize", sizeStars);
+
+  /* ---- Confetti ---- */
+  var cc = $("confetti"), cx = cc.getContext("2d"), bits = [], running = false;
+  function sizeConf() { cc.width = innerWidth; cc.height = innerHeight; }
+  sizeConf(); addEventListener("resize", sizeConf);
+  function burst(x, y, n) {
+    if (reduce) n = Math.min(n, 30);
+    for (var i = 0; i < n; i++) {
+      var a = Math.random() * 6.283, v = Math.random() * 11 + 4;
+      bits.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6, w: Math.random() * 9 + 5, h: Math.random() * 5 + 3, rot: Math.random() * 6, vr: Math.random() * 0.3 - 0.15, c: COLORS[(Math.random() * COLORS.length) | 0], life: 0 });
+    }
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function rain() {
+    for (var i = 0; i < 90; i++) bits.push({ x: Math.random() * cc.width, y: -20 - Math.random() * 300, vx: Math.random() * 2 - 1, vy: Math.random() * 3 + 2, w: Math.random() * 9 + 5, h: Math.random() * 5 + 3, rot: Math.random() * 6, vr: Math.random() * 0.2 - 0.1, c: COLORS[(Math.random() * COLORS.length) | 0], life: 0 });
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    cx.clearRect(0, 0, cc.width, cc.height);
+    for (var i = bits.length - 1; i >= 0; i--) {
+      var b = bits[i]; b.life++; b.vy += 0.22; b.vx *= 0.99; b.x += b.vx; b.y += b.vy; b.rot += b.vr;
+      if (b.y > cc.height + 30 || b.life > 400) { bits.splice(i, 1); continue; }
+      cx.save(); cx.translate(b.x, b.y); cx.rotate(b.rot); cx.fillStyle = b.c; cx.globalAlpha = Math.max(0, 1 - b.life / 400); cx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h); cx.restore();
+    }
+    if (bits.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0, 0, cc.width, cc.height); }
+  }
+  function bigShow() { burst(innerWidth * 0.2, innerHeight * 0.6, 90); burst(innerWidth * 0.8, innerHeight * 0.6, 90); burst(innerWidth * 0.5, innerHeight * 0.4, 120); rain(); }
+
+  /* ---- Lock / unlock ---- */
+  var opened = false;
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function check() {
+    var left = UNLOCK_AT - Date.now();
+    if (left <= 0 || location.hash === PREVIEW_HASH) { if (!opened) openSite(); return; }
+    var s = Math.floor(left / 1000);
+    $("cd").textContent = pad(Math.floor(s / 86400));
+    $("ch").textContent = pad(Math.floor(s % 86400 / 3600));
+    $("cm").textContent = pad(Math.floor(s % 3600 / 60));
+    $("cs").textContent = pad(s % 60);
+  }
+  setInterval(check, 1000);
+  addEventListener("hashchange", check);
+
+  function openSite() {
+    opened = true;
+    $("lock").hidden = true; $("site").hidden = false;
+    scrollTo(0, 0);
+    buildBalloons(); buildMarquee(); buildWall(); buildCards(); buildCoupons(); buildHoles();
+    setTimeout(bigShow, 350);
+  }
+
+  function buildBalloons() {
+    var box = $("balloons"), cols = ["#ff7aa8", "#ffc861", "#7be0c8", "#b69cff", "#ff9a5c"];
+    for (var i = 0; i < 9; i++) {
+      var b = document.createElement("div"); b.className = "balloon";
+      b.style.left = (4 + i * 11) + "%"; b.style.background = cols[i % cols.length];
+      b.style.animationDuration = (11 + (i % 4) * 3) + "s"; b.style.animationDelay = (-i * 2.3) + "s";
+      box.appendChild(b);
+    }
+  }
+  function buildMarquee() {
+    var words = ["AIKARI", "✦", "02", "✦", "HAPPY BIRTHDAY", "✦", "12 NOVEMBER", "✦"], html = "";
+    for (var r = 0; r < 4; r++) for (var i = 0; i < words.length; i++) html += "<span>" + words[i] + "</span>";
+    $("marq").innerHTML = html;
+  }
+
+  /* ---- Memory wall + lightbox ---- */
+  var ROT = [-4, 3, -2, 5, -5, 2, -3, 4];
+  function buildWall() {
+    var wall = $("wall"), real = MEMORIES.length > 0, items = real ? MEMORIES : PLACEHOLDERS.map(function (t) { return { caption: t }; });
+    items.forEach(function (m, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "polaroid";
+      b.style.setProperty("--r", ROT[i % ROT.length] + "deg");
+      var pic = document.createElement("span"); pic.className = "pic";
+      if (m.src) { var im = document.createElement("img"); im.src = m.src; im.alt = m.caption || "Our photo"; im.loading = "lazy"; pic.appendChild(im); }
+      else { pic.className += " empty"; pic.textContent = m.caption; }
+      b.appendChild(pic);
+      if (m.src) {
+        var c = document.createElement("span"); c.className = "cap"; c.textContent = m.caption || ""; b.appendChild(c);
+        if (m.date) { var d = document.createElement("span"); d.className = "dt"; d.textContent = m.date; b.appendChild(d); }
+        b.addEventListener("click", function () { $("lbimg").src = m.src; $("lbimg").alt = m.caption || "Our photo"; $("lbcap").textContent = (m.caption || "") + (m.date ? "  ·  " + m.date : ""); $("lb").hidden = false; });
+      } else {
+        var c2 = document.createElement("span"); c2.className = "cap"; c2.textContent = "Memory " + (i + 1); b.appendChild(c2);
+        b.addEventListener("click", function () { var r = b.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 20); });
+      }
+      wall.appendChild(b);
+    });
+  }
+  function closeLb() { $("lb").hidden = true; }
+  $("lbclose").addEventListener("click", closeLb);
+  $("lb").addEventListener("click", function (e) { if (e.target === $("lb")) closeLb(); });
+  addEventListener("keydown", function (e) { if (e.key === "Escape") closeLb(); });
+
+  /* ---- Reasons ---- */
+  function buildCards() {
+    var wrap = $("cards");
+    REASONS.forEach(function (r) {
+      var c = document.createElement("button"); c.type = "button"; c.className = "flip";
+      c.setAttribute("aria-label", r[1] + ": tap to read");
+      c.innerHTML = '<span class="in"><span class="face front"><span class="ico">' + r[0] + '</span><h3>' + r[1] + '</h3><small>tap to turn</small></span><span class="face back">' + r[2] + '</span></span>';
+      c.addEventListener("click", function () { c.classList.toggle("on"); if (c.classList.contains("on")) { var rc = c.getBoundingClientRect(); burst(rc.left + rc.width / 2, rc.top + rc.height / 2, 24); } });
+      wrap.appendChild(c);
+    });
+  }
+
+  /* ---- Scratch coupons ---- */
+  function buildCoupons() {
+    var box = $("coupons");
+    COUPONS.forEach(function (cp) {
+      var el = document.createElement("div"); el.className = "coupon";
+      el.innerHTML = '<div class="t"></div><div class="s"></div><canvas aria-label="Scratch to reveal"></canvas>';
+      el.querySelector(".t").textContent = cp[0]; el.querySelector(".s").textContent = cp[1];
+      box.appendChild(el);
+    });
+    [].slice.call(box.children).forEach(setupScratch);
+    addEventListener("resize", function () {
+      [].slice.call(box.children).forEach(function (el) { if (!el.classList.contains("done") && !el._busy) setupScratch(el); });
+    });
+  }
+  function setupScratch(el) {
+    var cv = el.querySelector("canvas"), r = el.getBoundingClientRect();
+    if (cv._h) { cv.removeEventListener("pointerdown", cv._h.d); cv.removeEventListener("pointermove", cv._h.m); cv.removeEventListener("pointerup", cv._h.u); cv.removeEventListener("pointercancel", cv._h.u); }
+    cv.width = Math.max(1, Math.floor(r.width)); cv.height = Math.max(1, Math.floor(r.height));
+    var c = cv.getContext("2d"), g = c.createLinearGradient(0, 0, cv.width, cv.height);
+    g.addColorStop(0, "#c9c3d9"); g.addColorStop(0.5, "#efeaf8"); g.addColorStop(1, "#b3abc8");
+    c.fillStyle = g; c.fillRect(0, 0, cv.width, cv.height);
+    c.fillStyle = "rgba(58,35,71,0.55)"; c.font = "700 18px Figtree, sans-serif"; c.textAlign = "center"; c.textBaseline = "middle";
+    c.fillText("SCRATCH HERE", cv.width / 2, cv.height / 2);
+    var down = false, n = 0, done = false;
+    function pos(e) { var b = cv.getBoundingClientRect(); return [(e.clientX - b.left) * cv.width / b.width, (e.clientY - b.top) * cv.height / b.height]; }
+    function scratch(e) {
+      if (!down || done) return;
+      var p = pos(e); c.globalCompositeOperation = "destination-out"; c.fillStyle = "#000"; c.beginPath(); c.arc(p[0], p[1], 24, 0, 6.283); c.fill();
+      if (++n % 8 === 0) {
+        var d = c.getImageData(0, 0, cv.width, cv.height).data, clear = 0, tot = 0;
+        for (var i = 3; i < d.length; i += 64) { tot++; if (d[i] < 40) clear++; }
+        if (clear / tot > 0.42) { done = true; el.classList.add("done"); var b = el.getBoundingClientRect(); burst(b.left + b.width / 2, b.top + b.height / 2, 60); }
+      }
+    }
+    var hd = function (e) { down = true; el._busy = true; try { cv.setPointerCapture(e.pointerId); } catch (x) {} scratch(e); };
+    var hu = function () { down = false; };
+    cv._h = { d: hd, m: scratch, u: hu };
+    cv.addEventListener("pointerdown", hd);
+    cv.addEventListener("pointermove", scratch);
+    cv.addEventListener("pointerup", hu);
+    cv.addEventListener("pointercancel", hu);
+  }
+
+  /* ---- Buttons ---- */
+  $("boom").addEventListener("click", bigShow);
+  $("boom2").addEventListener("click", bigShow);
+
+  /* ---- Cake ---- */
+  var cake = $("cake");
+  $("cakebtn").addEventListener("click", function () {
+    if (cake.classList.contains("out")) return;
+    cake.classList.add("out");
+    $("wishline").textContent = "Your wish is on its way. It will come true.";
+    $("relight").hidden = false;
+    var r = cake.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + 40, 110);
+  });
+  $("relight").addEventListener("click", function () { cake.classList.remove("out"); $("wishline").textContent = "Tap the cake"; $("relight").hidden = true; });
+
+  /* ---- Rage meter ---- */
+  var rage = 0, rl = 0;
+  $("ragebtn").addEventListener("click", function () {
+    var btn = $("ragebtn");
+    if (rage >= 100) { rage = 0; rl = 0; setRage(0, "Rage meter: calm. Suspiciously calm.", "Ragebait me"); return; }
+    rage = Math.min(100, rage + 9 + Math.floor(Math.random() * 8));
+    if (rage >= 100) {
+      var box = $("rage"); box.classList.add("shake"); setTimeout(function () { box.classList.remove("shake"); }, 600);
+      setRage(100, "MAX RAGE. Okay okay, I surrender. Happy Birthday, Aikari. I love you. Bye.", "Go again");
+      bigShow();
+    } else {
+      setRage(rage, RAGE_LINES[rl++ % RAGE_LINES.length], "Ragebait me again");
+    }
+  });
+  function setRage(v, line, label) {
+    $("pct").textContent = v + "%"; $("meterfill").style.width = v + "%"; $("meter").setAttribute("aria-valuenow", v);
+    $("rageline").textContent = line; $("ragebtn").textContent = label;
+  }
+
+  /* ---- Letter ---- */
+  $("seal").addEventListener("click", function () {
+    var env = $("env"); env.innerHTML = "";
+    var box = document.createElement("div"); box.className = "letter"; env.appendChild(box);
+    burst(innerWidth / 2, innerHeight * 0.5, 40);
+    var i = 0;
+    (function next() {
+      if (i >= LETTER.length) return;
+      var p = document.createElement("p"); box.appendChild(p);
+      var text = LETTER[i++], k = 0;
+      if (reduce) { p.textContent = text; next(); return; }
+      var t = setInterval(function () { p.textContent = text.slice(0, ++k); if (k >= text.length) { clearInterval(t); setTimeout(next, 250); } }, 13);
+    })();
+  });
+
+  /* ---- Whack the Ragebaiter ---- */
+  var score = 0, tl = 25, gt = null, sp = null, holes = [];
+  function buildHoles() {
+    var box = $("holes");
+    for (var i = 0; i < 9; i++) {
+      var h = document.createElement("button"); h.type = "button"; h.className = "hole"; h.setAttribute("aria-label", "Hole " + (i + 1));
+      h.innerHTML = '<span class="mole" aria-hidden="true">😏</span><span class="bam" aria-hidden="true">BAM!</span>';
+      (function (hole) {
+        hole.addEventListener("click", function () {
+          if (!hole.classList.contains("up")) return;
+          hole.classList.remove("up"); hole.classList.add("hit"); clearTimeout(hole._t);
+          score++; $("score").textContent = score;
+          var r = hole.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 14);
+          setTimeout(function () { hole.classList.remove("hit"); }, 450);
+        });
+      })(h);
+      box.appendChild(h); holes.push(h);
+    }
+  }
+  function endGame() {
+    clearInterval(gt); clearInterval(sp);
+    holes.forEach(function (h) { h.classList.remove("up", "hit"); clearTimeout(h._t); });
+    var msg = score >= 22 ? "Ragebaiter has been destroyed. Legend." : score >= 12 ? "Not bad. He is hurting." : "He is still standing. Try again?";
+    var over = $("gover"); over.innerHTML = "<b>" + score + " hits</b><p>" + msg + "</p>";
+    var b = document.createElement("button"); b.className = "btn"; b.type = "button"; b.textContent = "Play again"; b.addEventListener("click", startGame);
+    over.appendChild(b); over.hidden = false; burst(innerWidth / 2, innerHeight / 2, 60);
+  }
+  function startGame() {
+    score = 0; tl = 25; $("score").textContent = 0; $("time").textContent = 25; $("gover").hidden = true;
+    gt = setInterval(function () { tl--; $("time").textContent = tl; if (tl <= 0) endGame(); }, 1000);
+    sp = setInterval(function () {
+      var free = holes.filter(function (h) { return !h.classList.contains("up") && !h.classList.contains("hit"); });
+      if (!free.length) return;
+      var h = free[(Math.random() * free.length) | 0]; h.classList.add("up");
+      h._t = setTimeout(function () { h.classList.remove("up"); }, 650 + Math.random() * 450);
+    }, 520);
+  }
+  $("gstart").addEventListener("click", startGame);
+
+  /* ---- Lanterns ---- */
+  $("lform").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var inp = $("wishin"), v = inp.value.trim(); if (!v) return;
+    var sky = $("sky"), l = document.createElement("div"); l.className = "lantern"; l.textContent = v;
+    l.style.left = (6 + Math.random() * (Math.max(10, sky.clientWidth - 100))) + "px";
+    l.addEventListener("animationend", function () { l.remove(); });
+    sky.appendChild(l); inp.value = "";
+  });
+
+  /* ---- Sparkle cursor trail ---- */
+  var lastSpark = 0, SP = ["✦", "✧", "♡"];
+  addEventListener("pointermove", function (e) {
+    if (!opened || reduce || e.pointerType === "touch") return;
+    var now = performance.now(); if (now - lastSpark < 55) return; lastSpark = now;
+    var s = document.createElement("span"); s.className = "spark"; s.textContent = SP[(Math.random() * SP.length) | 0];
+    s.style.left = e.clientX + "px"; s.style.top = e.clientY + "px"; s.style.color = COLORS[(Math.random() * COLORS.length) | 0];
+    document.body.appendChild(s); setTimeout(function () { s.remove(); }, 900);
+  });
+
+  /* ---- YouTube song (audio only, starts on tap) ---- */
+  var playing = false;
+  var youtubePlayer = null;
+  var youtubeApiLoading = false;
+
+  function createYoutubePlayer() {
+    if (youtubePlayer) {
+      youtubePlayer.playVideo();
+      return;
+    }
+
+    var playerHost = document.createElement("div");
+    playerHost.id = "youtube-audio-player";
+    playerHost.style.cssText = "position:fixed;width:1px;height:1px;left:-10px;bottom:0;overflow:hidden;opacity:0;pointer-events:none;";
+    document.body.appendChild(playerHost);
+
+    youtubePlayer = new YT.Player("youtube-audio-player", {
+      width: "1",
+      height: "1",
+      videoId: "qLPhifz2H8I",
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        playsinline: 1,
+        rel: 0
+      },
+      events: {
+        onReady: function (event) {
+          event.target.playVideo();
+        },
+        onStateChange: function (event) {
+          if (event.data === YT.PlayerState.ENDED) {
+            playing = false;
+            $("tune").textContent = "Play your song";
+            bigShow();
+          }
+        },
+        onError: function () {
+          playing = false;
+          $("tune").textContent = "Play your song";
+        }
+      }
+    });
+  }
+
+  $("tune").addEventListener("click", function () {
+    if (playing) return;
+    playing = true;
+    $("tune").textContent = "Loading song...";
+
+    if (window.YT && window.YT.Player) {
+      createYoutubePlayer();
+      return;
+    }
+
+    if (!youtubeApiLoading) {
+      youtubeApiLoading = true;
+      window.onYouTubeIframeAPIReady = createYoutubePlayer;
+      var youtubeScript = document.createElement("script");
+      youtubeScript.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(youtubeScript);
+    }
+  });
+
+  /* ---- Start: runs last so every handler above is attached ---- */
+  check();
+})();
+</script>
+
+</body></html>
