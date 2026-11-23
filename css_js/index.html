@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS // Gaming Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-mark">N</div>
+    <div class="logo-text">NEXUS<span>//ARCADE</span></div>
+  </div>
+
+  <nav class="nav">
+    <a href="#" class="nav-item active" data-section="Dashboard">
+      <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      <span>Dashboard</span>
+    </a>
+    <a href="#" class="nav-item" data-section="Game Library">
+      <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
+      <span>Game Library</span>
+    </a>
+    <a href="#" class="nav-item" data-section="Leaderboard">
+      <svg viewBox="0 0 24 24"><path d="M6 2h12v4a6 6 0 0 1-12 0V2zM4 4H2v2a4 4 0 0 0 4 4M20 4h2v2a4 4 0 0 1-4 4M12 14v4M8 22h8M9 18h6"/></svg>
+      <span>Leaderboard</span>
+    </a>
+    <a href="#" class="nav-item" data-section="Achievements">
+      <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+      <span>Achievements</span>
+    </a>
+    <a href="#" class="nav-item" data-section="Settings">
+      <svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM19 13a7 7 0 0 0 0-2l2-1-2-3-2 1a7 7 0 0 0-2-1l0-2H9l0 2a7 7 0 0 0-2 1L5 7 3 10l2 1a7 7 0 0 0 0 2l-2 1 2 3 2-1a7 7 0 0 0 2 1l0 2h6l0-2a7 7 0 0 0 2-1l2 1 2-3z"/></svg>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-card">
+    <span class="sc-label">PRO SUBSCRIPTION</span>
+    <p class="sc-title">Unlock the full arena</p>
+    <p class="sc-sub">No ads, custom themes &amp; ranked play.</p>
+    <button class="sc-btn" id="upgradeBtn">Upgrade &rarr;</button>
+  </div>
+
+  <div class="profile">
+    <div class="avatar">AK</div>
+    <div class="profile-info">
+      <strong>ARJUN_KAI</strong>
+      <span>Level 42 &middot; Diamond</span>
+    </div>
+    <div class="online-dot" title="Online"></div>
+  </div>
+</aside>
+
+<main class="main">
+
+  <header class="topbar">
+    <div>
+      <h1 class="topbar-title">Dashboard</h1>
+      <p class="topbar-sub">Welcome back, Arjun. Here's your squad's activity.</p>
+    </div>
+    <div class="topbar-actions">
+      <div class="search">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></svg>
+        <input type="text" placeholder="Search games, players..." id="searchInput">
+      </div>
+      <button class="icon-btn" id="notifyBtn" title="Notifications">
+        <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span class="badge" id="notifyBadge">3</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- STAT CARDS -->
+  <section class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="stat-icon cyan"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></span>
+        <span class="stat-label">Games Played</span>
+      </div>
+      <div class="stat-value" data-count="1284">0</div>
+      <div class="stat-trend up">&#9650; 12% vs last month</div>
+      <div class="spark">
+        <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+          <path class="spark-line" d="M0,38 L20,30 L40,34 L60,20 L80,26 L100,14 L120,22 L140,10 L160,18 L180,6 L200,12"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="stat-icon green"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></span>
+        <span class="stat-label">Win Rate</span>
+      </div>
+      <div class="stat-value" data-count="68">0</div>
+      <div class="stat-trend up">&#9650; 4% vs last month</div>
+      <div class="spark">
+        <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+          <path class="spark-line green-line" d="M0,30 L20,26 L40,32 L60,22 L80,18 L100,24 L120,12 L140,16 L160,9 L180,14 L200,8"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="stat-icon purple"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></span>
+        <span class="stat-label">Play Time (hrs)</span>
+      </div>
+      <div class="stat-value" data-count="342">0</div>
+      <div class="stat-trend up">&#9650; 9% vs last month</div>
+      <div class="spark">
+        <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+          <path class="spark-line purple-line" d="M0,40 L20,34 L40,28 L60,30 L80,20 L100,24 L120,14 L140,18 L160,10 L180,16 L200,6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-head">
+        <span class="stat-icon orange"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 5 5.6.6-4.2 3.8 1.1 5.6L12 14.9 7.1 17.9l1.1-5.6L4 8.6 9.6 8z"/></svg></span>
+        <span class="stat-label">Total Trophies</span>
+      </div>
+      <div class="stat-value" data-count="97">0</div>
+      <div class="stat-trend up">&#9650; 6% vs last month</div>
+      <div class="spark">
+        <svg viewBox="0 0 200 50" preserveAspectRatio="none">
+          <path class="spark-line orange-line" d="M0,36 L20,32 L40,24 L60,28 L80,18 L100,22 L120,14 L140,10 L160,16 L180,8 L200,4"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="content-grid">
+
+    <!-- GAME LIBRARY -->
+    <section class="panel library-panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Game Library</h2>
+        <div class="filter-tabs" id="filterTabs">
+          <button class="ftab active" data-filter="all">All</button>
+          <button class="ftab" data-filter="playing">Playing</button>
+          <button class="ftab" data-filter="completed">Completed</button>
+        </div>
+      </div>
+
+      <div class="game-grid" id="gameGrid">
+
+        <article class="game-card" data-status="playing">
+          <div class="game-cover" style="--c1:#00e5ff;--c2:#0a1a2f;">
+            <span class="cover-tag">FPS</span>
+            <span class="cover-glyph">&#9673;</span>
+          </div>
+          <div class="game-body">
+            <h3>Neon Strike</h3>
+            <p class="game-meta">Shooter &middot; 42 hrs</p>
+            <div class="progress"><span style="width:72%"></span></div>
+            <div class="game-foot">
+              <span class="status playing">Playing</span>
+              <div class="game-btns">
+                <button class="g-btn" data-game="Neon Strike">Play</button>
+                <button class="g-fav" title="Favorite">&#9734;</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="game-card" data-status="playing">
+          <div class="game-cover" style="--c1:#8b5cf6;--c2:#1a1030;">
+            <span class="cover-tag">RPG</span>
+            <span class="cover-glyph">&#10022;</span>
+          </div>
+          <div class="game-body">
+            <h3>Aether Realms</h3>
+            <p class="game-meta">Open World &middot; 118 hrs</p>
+            <div class="progress"><span style="width:45%"></span></div>
+            <div class="game-foot">
+              <span class="status playing">Playing</span>
+              <div class="game-btns">
+                <button class="g-btn" data-game="Aether Realms">Play</button>
+                <button class="g-fav" title="Favorite">&#9734;</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="game-card" data-status="completed">
+          <div class="game-cover" style="--c1:#00ff9d;--c2:#08231a;">
+            <span class="cover-tag">RACING</span>
+            <span class="cover-glyph">&#10070;</span>
+          </div>
+          <div class="game-body">
+            <h3>Turbo Rush</h3>
+            <p class="game-meta">Racing &middot; 96 hrs</p>
+            <div class="progress"><span style="width:100%"></span></div>
+            <div class="game-foot">
+              <span class="status completed">Completed</span>
+              <div class="game-btns">
+                <button class="g-btn" data-game="Turbo Rush">Replay</button>
+                <button class="g-fav" title="Favorite">&#9734;</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="game-card" data-status="completed">
+          <div class="game-cover" style="--c1:#ff5c7a;--c2:#2a0f18;">
+            <span class="cover-tag">PUZZLE</span>
+            <span class="cover-glyph">&#9635;</span>
+          </div>
+          <div class="game-body">
+            <h3>Cipher Lock</h3>
+            <p class="game-meta">Puzzle &middot; 28 hrs</p>
+            <div class="progress"><span style="width:100%"></span></div>
+            <div class="game-foot">
+              <span class="status completed">Completed</span>
+              <div class="game-btns">
+                <button class="g-btn" data-game="Cipher Lock">Replay</button>
+                <button class="g-fav" title="Favorite">&#9734;</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section class="panel leader-panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Leaderboard</h2>
+        <span class="season-pill">SZN 07</span>
+      </div>
+      <ul class="leader-list" id="leaderList">
+        <li class="leader-row" data-player="VOIDRUNNER" data-score="9820">
+          <span class="rank r1">1</span>
+          <div class="avatar small av1">VR</div>
+          <div class="leader-info">
+            <strong>VOIDRUNNER</strong>
+            <span class="rank-badge gold">Grandmaster</span>
+          </div>
+          <span class="leader-score">9,820</span>
+        </li>
+        <li class="leader-row" data-player="NYX" data-score="9110">
+          <span class="rank r2">2</span>
+          <div class="avatar small av2">NX</div>
+          <div class="leader-info">
+            <strong>NYX.exe</strong>
+            <span class="rank-badge silver">Grandmaster</span>
+          </div>
+          <span class="leader-score">9,110</span>
+        </li>
+        <li class="leader-row" data-player="ZEROCOOL" data-score="8760">
+          <span class="rank r3">3</span>
+          <div class="avatar small av3">ZC</div>
+          <div class="leader-info">
+            <strong>ZEROCOOL</strong>
+            <span class="rank-badge silver">Master</span>
+          </div>
+          <span class="leader-score">8,760</span>
+        </li>
+        <li class="leader-row me" data-player="ARJUN_KAI" data-score="8420">
+          <span class="rank r4">4</span>
+          <div class="avatar small avme">AK</div>
+          <div class="leader-info">
+            <strong>ARJUN_KAI <em>YOU</em></strong>
+            <span class="rank-badge cyanb">Diamond</span>
+          </div>
+          <span class="leader-score">8,420</span>
+        </li>
+        <li class="leader-row" data-player="GLITCH" data-score="7990">
+          <span class="rank r5">5</span>
+          <div class="avatar small av4">GL</div>
+          <div class="leader-info">
+            <strong>GLITCHWAVE</strong>
+            <span class="rank-badge cyanb">Diamond</span>
+          </div>
+          <span class="leader-score">7,990</span>
+        </li>
+      </ul>
+      <button class="panel-link" id="viewAllBtn">View full leaderboard &rarr;</button>
+    </section>
+
+    <!-- ACTIVITY -->
+    <section class="panel activity-panel">
+      <div class="panel-head">
+        <h2 class="panel-title">Recent Activity</h2>
+      </div>
+      <ul class="activity-feed" id="activityFeed">
+        <li class="feed-item">
+          <span class="feed-dot cyan-bg"></span>
+          <div class="feed-body">
+            <p><strong>You</strong> hit <b>Level 42</b> in Aether Realms</p>
+            <span class="feed-time">2 hours ago</span>
+          </div>
+        </li>
+        <li class="feed-item">
+          <span class="feed-dot green-bg"></span>
+          <div class="feed-body">
+            <p><strong>VOIDRUNNER</strong> passed you on the leaderboard</p>
+            <span class="feed-time">5 hours ago</span>
+          </div>
+        </li>
+        <li class="feed-item">
+          <span class="feed-dot orange-bg"></span>
+          <div class="feed-body">
+            <p>You unlocked <b>Shadow Sniper</b> achievement</p>
+            <span class="feed-time">Yesterday</span>
+          </div>
+        </li>
+        <li class="feed-item">
+          <span class="feed-dot purple-bg"></span>
+          <div class="feed-body">
+            <p><strong>Squad Delta</strong> invited you to a raid</p>
+            <span class="feed-time">Yesterday</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <span>NEXUS//ARCADE &copy; 2026</span>
+    <span class="footer-status"><span class="online-dot inline"></span> Servers operational &middot; 24ms</span>
+  </footer>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
