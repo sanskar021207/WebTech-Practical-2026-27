@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <rect width="200" height="60" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="100" y="22" font-family="Georgia, serif" font-size="14" font-weight="700" fill="#0d9488" text-anchor="middle">The Joint Commission</text>
+  <text x="100" y="38" font-family="Inter, sans-serif" font-size="9" font-weight="500" fill="#475569" text-anchor="middle">Gold Seal of Approval®</text>
+  <circle cx="30" cy="30" r="18" stroke="#0d9488" stroke-width="2" fill="none"/>
+  <path d="M30 18v24M18 30h24" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
+</svg>
