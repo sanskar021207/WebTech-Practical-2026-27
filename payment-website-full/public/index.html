@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment Checkout</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">PayDemo</div>
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">About</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Secure Checkout</h1>
+            <p>Enter your payment details to complete your purchase.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="checkout-wrapper">
+            <!-- Payment Form -->
+            <section class="payment-form-section">
+                <h2>Payment Details</h2>
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-element">Credit or Debit Card</label>
+                        <div id="card-element" class="card-input"></div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="amount">Amount ($)</label>
+                            <input type="number" id="amount" placeholder="0.00" min="0.01" step="0.01" value="49.99" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="currency">Currency</label>
+                            <select id="currency">
+                                <option value="usd">USD</option>
+                                <option value="eur">EUR</option>
+                                <option value="gbp">GBP</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn btn-primary btn-pay">
+                        <span id="btn-text">Pay $49.99</span>
+                        <span id="spinner" class="spinner hidden"></span>
+                    </button>
+                </form>
+
+                <div id="payment-message" class="message hidden"></div>
+            </section>
+
+            <!-- Order Summary -->
+            <section class="order-summary">
+                <div class="summary-card">
+                    <h3>Order Summary</h3>
+                    <div class="summary-item">
+                        <span>Item</span>
+                        <span>Portfolio Project</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Quantity</span>
+                        <span>1</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Subtotal</span>
+                        <span id="summary-subtotal">$49.99</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Tax</span>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-item total">
+                        <span>Total</span>
+                        <span id="summary-total">$49.99</span>
+                    </div>
+                </div>
+
+                <div class="security-info">
+                    <h3>Secure Checkout</h3>
+                    <div class="security-item">
+                        <span class="security-icon">🔒</span>
+                        <span>SSL Encrypted</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-icon">✅</span>
+                        <span>PCI DSS Compliant</span>
+                    </div>
+                    <div class="security-item">
+                        <span class="security-icon">🛡️</span>
+                        <span>Fraud Protection</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">PayDemo</div>
+            <p>&copy; 2026 Payment Integration Demo. Built for e-portfolio showcase.</p>
+            <p class="test-mode"><strong>Test Mode:</strong> Use card <code>4242 4242 4242 4242</code> for successful payments.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
